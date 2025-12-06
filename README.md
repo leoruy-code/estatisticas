@@ -1,138 +1,241 @@
+# ⚽ Sistema de Análise Poisson - Brasileirão 2025
 
-# Sistema de Estatísticas de Futebol para Apostas ⚽
+<div align="center">
 
-Este projeto tem como objetivo analisar informações de jogadores e times para gerar estatísticas e probabilidades para apostas múltiplas em futebol, facilitando a tomada de decisão para apostadores.
+![Python](https://img.shields.io/badge/Python-3.14-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.40-red)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## 🚀 Funcionalidades
+**Sistema profissional de análise de apostas esportivas usando distribuição Poisson**
 
-- ✅ **Cadastro de jogadores** com estatísticas detalhadas (gols, assistências, cartões, etc.)
-- ✅ **Criação e gerenciamento de times** com escalações
-- ✅ **Análise estatística** de times e jogadores
-- ✅ **Interface web moderna** com Streamlit
-- ✅ **Armazenamento em JSON** (fácil de editar e importar/exportar)
-- ✅ **Deploy com Docker** para facilitar a execução
+[Features](#-features) • [Instalação](#-instalação) • [Como Usar](#-como-usar) • [Tecnologias](#-tecnologias)
 
-## 📦 Requisitos
+</div>
 
-- **Docker** e **Docker Compose** (recomendado)
-- OU **Python 3.12+** (para execução local)
+---
 
-## 🐳 Como Usar com Docker (Recomendado)
+## 🎯 Sobre o Projeto
 
-### 1. Construir e Iniciar o Container
+Sistema completo de análise estatística para apostas no Brasileirão 2025, baseado em **metodologia profissional de casas de apostas**. Utiliza distribuição de Poisson para calcular probabilidades precisas de eventos em partidas de futebol.
 
-```bash
-docker-compose up --build
+### 📊 Base de Dados
+- **722 jogadores** com estatísticas completas da temporada
+- **20 times** do Brasileirão 2025
+- Dados reais de **partidas, gols, escanteios, chutes e faltas**
+- Histórico de **últimas 20 partidas** por time
+- **Multiplicadores de forma** baseados em desempenho recente
+
+---
+
+## 🚀 Features
+
+### 🎲 Análise de Partidas (Poisson)
+- **Probabilidades Over/Under** para gols (0.5, 1.5, 2.5, 3.5)
+- **Probabilidades Over/Under** para escanteios (8.5, 9.5, 10.5, 11.5)
+- **BTTS** (Both Teams To Score)
+- **Resultado 1X2** (vitória casa, empate, vitória fora)
+- **Top placares** mais prováveis
+- **Odds justas** sem margem da casa
+
+### 📈 Rankings e Estatísticas
+- **⚔️ Ataque**: Attack Strength por time
+- **🛡️ Defesa**: Defense Weakness (dados reais de gols sofridos)
+- **📈 Forma**: Multiplicadores baseados em últimas 5 partidas
+- **🚩 Escanteios**: Médias por time (casa/fora)
+
+### 🧮 Motor de Cálculo
+```python
+λ = league_avg × attack_strength × opponent_defense_weakness × home_advantage × form_multiplier
 ```
 
-### 2. Acessar a Aplicação
+- **Attack Strength** = Gols marcados / Média da liga
+- **Defense Weakness** = Gols sofridos / Média da liga (dados reais)
+- **Form Multiplier** = Ajuste baseado em desempenho recente (0.8 - 1.2)
+- **Home Advantage** = 1.08 (8% a mais em casa)
 
-Abra seu navegador em: **http://localhost:8501**
+---
 
-### 3. Parar o Container
+## 🛠️ Instalação
 
-```bash
-docker-compose down
-```
+### Pré-requisitos
+- Python 3.14+
+- pip
 
-### Comandos Docker Úteis
-
-```bash
-# Reconstruir a imagem
-docker-compose build
-
-# Rodar em background
-docker-compose up -d
-
-# Ver logs
-docker-compose logs -f
-
-# Parar e remover volumes
-docker-compose down -v
-```
-
-## 💻 Como Usar Localmente (sem Docker)
-
-### 1. Instalar Dependências
+### Passo a Passo
 
 ```bash
+# 1. Clone o repositório
+git clone https://github.com/leoruy-code/estatisticas.git
+cd estatisticas
+
+# 2. Crie ambiente virtual
+python -m venv .venv
+source .venv/bin/activate  # macOS/Linux
+# ou
+.venv\Scripts\activate  # Windows
+
+# 3. Instale dependências
 pip install -r requirements.txt
-```
 
-### 2. Executar a Aplicação Web
-
-```bash
+# 4. Execute o frontend
 streamlit run src/frontend/app.py
 ```
 
-Acesse: **http://localhost:8501**
+O sistema abrirá automaticamente em `http://localhost:8501`
 
-### 3. Usar CLI para Cadastro
+---
 
-```bash
-# Cadastrar jogadores e times via linha de comando
-python src/data_manager.py
+## 💻 Como Usar
 
-# Analisar estatísticas de times
-python src/analyze.py
+### Interface Web
+
+1. **🎯 Análise de Partida**
+   - Selecione time da casa e visitante
+   - Veja forma recente automática dos times
+   - Analise probabilidades de gols e escanteios
+   - Obtenha odds justas para suas apostas
+
+2. **🏆 Rankings**
+   - Consulte força ofensiva/defensiva
+   - Veja times em boa/má forma
+   - Compare médias de escanteios
+
+3. **📊 Ver Times e Estatísticas**
+   - Estatísticas completas de cada time
+   - Lista de jogadores com métricas individuais
+
+### Análise via Python
+
+```python
+from src.poisson_analyzer import PoissonAnalyzer
+
+# Inicializar analisador
+analyzer = PoissonAnalyzer()
+
+# Analisar partida
+pred = analyzer.prever_partida("Flamengo", "Palmeiras")
+
+print(f"Over 2.5 gols: {pred.prob_over_25_goals*100:.1f}%")
+print(f"Over 10.5 escanteios: {pred.prob_over_105_corners*100:.1f}%")
+print(f"BTTS: {pred.prob_btts*100:.1f}%")
 ```
+
+---
 
 ## 📁 Estrutura do Projeto
 
 ```
-RAG ESTATISTICAS/
-├── Dockerfile              # Configuração Docker
-├── docker-compose.yml      # Orquestração Docker
-├── requirements.txt        # Dependências Python
-├── README.md              # Este arquivo
-├── data/                  # Dados persistidos
-│   ├── jogadores.json    # Jogadores cadastrados
-│   └── times.json        # Times cadastrados
-└── src/                   # Código-fonte
-    ├── models.py         # Modelos de dados
-    ├── data_manager.py   # CLI para cadastro
-    ├── analyze.py        # Análise estatística
-    └── frontend/
-        └── app.py        # Interface Streamlit
+estatisticas/
+├── src/
+│   ├── frontend/
+│   │   └── app.py                    # Interface Streamlit
+│   ├── poisson_analyzer.py           # Motor de análise Poisson
+│   ├── buscar_estatisticas.py        # Coleta stats jogadores
+│   ├── buscar_partidas.py            # Coleta histórico partidas
+│   └── buscar_escanteios.py          # Coleta dados escanteios
+├── data/
+│   ├── jogadores.json                # 722 jogadores
+│   └── times.json                    # 20 times + métricas
+└── requirements.txt
 ```
-
-## 📊 Dados de Exemplo
-
-O projeto já vem com dados de exemplo incluindo:
-- 6 jogadores (Neymar Jr, Cristiano Ronaldo, Benzema, Mané, Mahrez, Mitrovic)
-- 2 times (Al-Nassr e Al-Hilal)
-
-Você pode adicionar, editar ou remover dados através da interface web ou editando os arquivos JSON.
-
-## 🎯 Próximas Funcionalidades
-
-- [ ] Comparação direta entre times (estatísticas lado a lado)
-- [ ] Gráficos e visualizações interativas
-- [ ] Exportação de relatórios em PDF
-- [ ] Importação de dados via CSV/Excel
-- [ ] Web scraping de sites de estatísticas
-- [ ] API REST para integração
-- [ ] Machine learning para previsões
-- [ ] Histórico de partidas
-- [ ] Cálculo de probabilidades de apostas
-
-## 🛠️ Tecnologias Utilizadas
-
-- **Python 3.12**
-- **Streamlit** - Interface web
-- **Docker** - Containerização
-- **JSON** - Armazenamento de dados
-
-## 📝 Notas
-
-- Os dados são armazenados em arquivos JSON na pasta `data/`
-- O Docker monta um volume para persistir os dados entre reinicializações
-- Você pode editar os arquivos JSON diretamente se preferir
-
-## 🤝 Contribuições
-
-Este projeto está em desenvolvimento ativo e aberto a sugestões e contribuições!
 
 ---
 
-**Desenvolvido para análise de estatísticas esportivas** 🎲⚽
+## 🔬 Tecnologias
+
+| Tecnologia | Uso |
+|------------|-----|
+| **Python 3.14** | Linguagem principal |
+| **Streamlit** | Interface web interativa |
+| **SciPy** | Cálculos de distribuição Poisson |
+| **NumPy** | Operações matemáticas |
+| **Requests** | API SofaScore |
+| **Pandas** | Manipulação de dados |
+
+---
+
+## 📊 Exemplo de Análise
+
+**Flamengo (casa) vs Palmeiras (fora)**
+
+```
+📊 LAMBDAS ESTIMADOS
+  λ Gols Flamengo: 1.18
+  λ Gols Palmeiras: 1.08
+  λ Total Gols: 2.26
+  λ Total Escanteios: 13.25
+
+🎯 PROBABILIDADES GOLS
+  Over 2.5: 39.2% (odd 2.55)
+  BTTS: 45.7% (odd 2.19)
+
+🚩 ESCANTEIOS
+  Over 10.5: 76.9% (odd 1.30)
+  Over 11.5: 67.2% (odd 1.49)
+
+🏆 RESULTADO (1X2)
+  Vitória Flamengo: 38.2% (odd 2.62)
+  Empate: 28.6% (odd 3.49)
+  Vitória Palmeiras: 33.1% (odd 3.02)
+```
+
+---
+
+## 🔄 Atualização de Dados
+
+Para atualizar estatísticas dos times:
+
+```bash
+# Atualizar estatísticas de jogadores
+python src/buscar_estatisticas.py
+
+# Atualizar histórico de partidas e forma
+python src/buscar_partidas.py
+
+# Atualizar dados de escanteios
+python src/buscar_escanteios.py
+```
+
+---
+
+## 📝 Metodologia
+
+O sistema segue metodologia profissional baseada em:
+
+1. **Distribuição de Poisson** para eventos raros (gols)
+2. **Força ofensiva/defensiva** normalizada pela média da liga
+3. **Dados reais** de partidas para precisão
+4. **Multiplicadores contextuais** (casa, forma, etc.)
+5. **Odds justas** sem margem da casa de apostas
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para:
+- Reportar bugs
+- Sugerir novas features
+- Melhorar a documentação
+- Adicionar novos mercados de apostas
+
+---
+
+## 📜 Licença
+
+Este projeto é fornecido "como está" para fins educacionais e de pesquisa.
+
+**⚠️ Aviso**: Este sistema é para análise estatística. Aposte com responsabilidade.
+
+---
+
+## 👨‍💻 Autor
+
+**Leonardo Ruy** - [@leoruy-code](https://github.com/leoruy-code)
+
+---
+
+<div align="center">
+
+**⭐ Se este projeto te ajudou, considere dar uma estrela!**
+
+</div>
