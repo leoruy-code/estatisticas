@@ -1,0 +1,144 @@
+
+🔄 ATUALIZAÇÃO COMPLETA - BRASILEIRÃO 2025
+======================================================================
+⚠️  Esta operação irá:
+   1. Limpar todos os jogadores antigos do Brasileirão
+   2. Buscar elencos atualizados de todos os times
+   3. Atualizar estatísticas de cada jogador
+======================================================================
+
+📊 Jogadores antes da limpeza: 0
+🌍 Jogadores de outras ligas (preservados): 0
+
+💾 Backup criado: /Users/leo/RAG ESTATISTICAS/src/../data/jogadores_backup.json
+
+🚀 INICIANDO ATUALIZAÇÃO COMPLETA DOS 20 TIMES...
+⏱️  Tempo estimado: 30-40 minutos
+======================================================================
+
+⚽ ATUALIZADOR DE ESTATÍSTICAS - SOFASCORE
+======================================================================
+📅 Data: 05/12/2025 21:46
+🏆 Temporada: Brasileirão 2025
+======================================================================
+
+
+[1/20] Flamengo
+----------------------------------------------------------------------
+🔍 Buscando elenco: Flamengo... ❌ Erro 403
+
+[2/20] Palmeiras
+----------------------------------------------------------------------
+🔍 Buscando elenco: Palmeiras... ❌ Erro 403
+
+[3/20] Corinthians
+----------------------------------------------------------------------
+🔍 Buscando elenco: Corinthians... ❌ Erro 403
+
+[4/20] São Paulo
+----------------------------------------------------------------------
+🔍 Buscando elenco: São Paulo... ❌ Erro 403
+
+[5/20] Grêmio
+----------------------------------------------------------------------
+🔍 Buscando elenco: Grêmio... ❌ Erro 403
+
+[6/20] Internacional
+----------------------------------------------------------------------
+🔍 Buscando elenco: Internacional... ❌ Erro 403
+
+[7/20] Fluminense
+----------------------------------------------------------------------
+🔍 Buscando elenco: Fluminense... ❌ Erro 403
+
+[8/20] Atlético Mineiro
+----------------------------------------------------------------------
+🔍 Buscando elenco: Atlético Mineiro... ❌ Erro 403
+
+[9/20] Cruzeiro
+----------------------------------------------------------------------
+🔍 Buscando elenco: Cruzeiro... ❌ Erro 403
+
+[10/20] Botafogo
+----------------------------------------------------------------------
+🔍 Buscando elenco: Botafogo... ❌ Erro 403
+
+[11/20] Vasco da Gama
+----------------------------------------------------------------------
+🔍 Buscando elenco: Vasco da Gama... ❌ Erro 403
+
+[12/20] Santos
+----------------------------------------------------------------------
+🔍 Buscando elenco: Santos... ❌ Erro 403
+
+[13/20] Athletico Paranaense
+----------------------------------------------------------------------
+🔍 Buscando elenco: Athletico Paranaense... ❌ Erro 403
+
+[14/20] Bahia
+----------------------------------------------------------------------
+🔍 Buscando elenco: Bahia... ❌ Erro 403
+
+[15/20] Fortaleza
+----------------------------------------------------------------------
+🔍 Buscando elenco: Fortaleza... ❌ Erro 403
+
+[16/20] Bragantino
+----------------------------------------------------------------------
+🔍 Buscando elenco: Bragantino... ❌ Erro 403
+
+[17/20] Cuiabá
+----------------------------------------------------------------------
+🔍 Buscando elenco: Cuiabá... ❌ Erro 403
+
+[18/20] Juventude
+----------------------------------------------------------------------
+🔍 Buscando elenco: Juventude... ❌ Erro 403
+
+[19/20] Vitória
+----------------------------------------------------------------------
+🔍 Buscando elenco: Vitória... ❌ Erro 403
+
+[20/20] Atlético Goianiense
+----------------------------------------------------------------------
+🔍 Buscando elenco: Atlético Goianiense... ❌ Erro 403
+
+======================================================================
+🎉 ATUALIZAÇÃO CONCLUÍDA!
+======================================================================
+✅ Jogadores processados: 0
+🆕 Jogadores novos: 0
+♻️  Jogadores atualizados: 0
+📊 Total no sistema: 0
+======================================================================
+
+======================================================================
+🎉 ATUALIZAÇÃO CONCLUÍDA COM SUCESSO!
+======================================================================
+
+📊 RESULTADO FINAL:
+   Total de jogadores: 0
+   Jogadores do Brasileirão: 0
+   Outras ligas: 0
+
+📋 JOGADORES POR TIME:
+   Athletico Paranaense        0 jogadores (  0 com stats)
+   Atlético Goianiense         0 jogadores (  0 com stats)
+   Atlético Mineiro            0 jogadores (  0 com stats)
+   Bahia                       0 jogadores (  0 com stats)
+   Botafogo                    0 jogadores (  0 com stats)
+   Bragantino                  0 jogadores (  0 com stats)
+   Corinthians                 0 jogadores (  0 com stats)
+   Cruzeiro                    0 jogadores (  0 com stats)
+   Cuiabá                      0 jogadores (  0 com stats)
+   Flamengo                    0 jogadores (  0 com stats)
+   Fluminense                  0 jogadores (  0 com stats)
+   Fortaleza                   0 jogadores (  0 com stats)
+   Grêmio                      0 jogadores (  0 com stats)
+   Internacional               0 jogadores (  0 com stats)
+   Juventude                   0 jogadores (  0 com stats)
+   Palmeiras                   0 jogadores (  0 com stats)
+   Santos                      0 jogadores (  0 com stats)
+   São Paulo                   0 jogadores (  0 com stats)
+   Vasco da Gama               0 jogadores (  0 com stats)
+   Vitória                     0 jogadores (  0 com stats)

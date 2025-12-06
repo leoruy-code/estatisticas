@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: rag_estatisticas_db
+    environment:
+      POSTGRES_DB: estatisticas
+      POSTGRES_USER: estatisticas_user
+      POSTGRES_PASSWORD: estatisticas_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U estatisticas_user -d estatisticas"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  futebol-app:
+    build: .
+    container_name: futebol-estatisticas
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./src:/app/src
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=estatisticas
+      - DB_USER=estatisticas_user
+      - DB_PASSWORD=estatisticas_pass
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

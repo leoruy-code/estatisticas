@@ -1,0 +1,837 @@
+
+🚀 Iniciando atualização completa do Brasileirão 2025...
+⏱️  Tempo estimado: 30-40 minutos
+💡 Você pode interromper com Ctrl+C a qualquer momento
+
+⚽ ATUALIZADOR DE ESTATÍSTICAS - SOFASCORE
+======================================================================
+📅 Data: 05/12/2025 20:58
+🏆 Temporada: Brasileirão 2025
+======================================================================
+
+
+[1/20] Flamengo
+----------------------------------------------------------------------
+🔍 Buscando elenco: Flamengo... ✅ 43 jogadores
+   [1/43] Pedro... ✅ 12G 6A 21J
+   [2/43] Bruno Henrique... ✅ 8G 0A 32J
+   [3/43] Juninho Vieira... ✅ 1G 0A 15J
+   [4/43] Wallace Yan... ✅ 1G 2A 16J
+   [5/43] Pedro Leão... ⚪ Sem dados
+   [6/43] Douglas Costa Telles... ✅ 1G 0A 1J
+   [7/43] Giorgian De Arrascaeta... ✅ 18G 14A 33J
+   [8/43] Jorginho... ✅ 3G 1A 18J
+   [9/43] Samuel Lino... ✅ 4G 5A 21J
+   [10/43] Gonzalo Plata... ✅ 4G 1A 28J
+   [11/43] Nicolás de la Cruz... ✅ 0G 0A 19J
+   [12/43] Luiz Araújo... ✅ 7G 3A 35J
+   [13/43] Jorge Carrascal... ✅ 2G 5A 16J
+   [14/43] Saúl Ñíguez... ✅ 0G 2A 16J
+   [15/43] Everton... ✅ 1G 3A 23J
+   [16/43] Erick Pulgar... ✅ 1G 0A 17J
+   [17/43] Michael... ✅ 1G 3A 14J
+   [18/43] Allan... ✅ 0G 0A 13J
+   [19/43] Evertton Araujo... ✅ 1G 0A 17J
+   [20/43] Guilherme Gomes... ⚪ Sem dados
+   [21/43] Pablo Lucio... ⚪ Sem dados
+   [22/43] Caio Joshua... ⚪ Sem dados
+   [23/43] Fabiano... ⚪ Sem dados
+   [24/43] Fabiano Henrique Alves dos Santos... ⚪ Sem dados
+   [25/43] Danilo... ✅ 1G 1A 20J
+   [26/43] Alex Sandro... ✅ 0G 0A 20J
+   [27/43] Léo Ortiz... ✅ 1G 2A 26J
+   [28/43] Emerson Royal... ✅ 1G 1A 15J
+   [29/43] Léo Pereira... ✅ 4G 0A 34J
+   [30/43] Matías Viña... ✅ 0G 0A 8J
+   [31/43] Ayrton Lucas... ✅ 2G 0A 18J
+   [32/43] Guillermo Varela... ✅ 0G 3A 20J
+   [33/43] Cleiton... ✅ 0G 0A 2J
+   [34/43] Iago Silva... ⚪ Sem dados
+   [35/43] Pablo... ⚪ Sem dados
+   [36/43] João Victor... ✅ 0G 0A 3J
+   [37/43] Daniel Sales... ⚪ Sem dados
+   [38/43] Carbone... ⚪ Sem dados
+   [39/43] Da Mata... ⚪ Sem dados
+   [40/43] Agustín Rossi... ✅ 0G 0A 37J
+   [41/43] Matheus Cunha... ⚪ Sem dados
+   [42/43] Dyogo Alves... ⚪ Sem dados
+   [43/43] Leonardo Nannetti... ⚪ Sem dados
+
+[2/20] Palmeiras
+----------------------------------------------------------------------
+🔍 Buscando elenco: Palmeiras... ✅ 31 jogadores
+   [1/31] Vitor Roque... ✅ 16G 3A 33J
+   [2/31] José López... ✅ 11G 2A 32J
+   [3/31] Paulinho... ✅ 0G 0A 7J
+   [4/31] Ramón Sosa... ✅ 2G 3A 22J
+   [5/31] Luighi Hanri... ✅ 1G 0A 10J
+   [6/31] Bruno Rodrigues... ✅ 2G 0A 9J
+   [7/31] Raphael Veiga... ✅ 2G 4A 25J
+   [8/31] Andreas Pereira... ✅ 2G 0A 15J
+   [9/31] Facundo Torres... ✅ 5G 3A 28J
+   [10/31] Felipe Anderson... ✅ 4G 2A 31J
+   [11/31] Aníbal Moreno... ✅ 0G 1A 27J
+   [12/31] Mauricio... ✅ 3G 7A 28J
+   [13/31] Allan... ✅ 2G 3A 27J
+   [14/31] Emiliano Martínez... ✅ 1G 0A 25J
+   [15/31] Lucas Evangelista... ✅ 2G 1A 19J
+   [16/31] Vitor Figueiredo... ⚪ Sem dados
+   [17/31] Rômulo... ✅ 0G 0A 9J
+   [18/31] Gustavo Gómez... ✅ 2G 1A 27J
+   [19/31] Joaquín Piquerez... ✅ 3G 1A 30J
+   [20/31] Agustín Giay... ✅ 0G 0A 28J
+   [21/31] Murilo... ✅ 1G 1A 20J
+   [22/31] Bruno Fuchs... ✅ 2G 0A 26J
+   [23/31] Luis Benedetti... ✅ 1G 0A 4J
+   [24/31] Khellven... ✅ 0G 2A 13J
+   [25/31] Micael... ✅ 0G 1A 16J
+   [26/31] Jefté... ✅ 0G 2A 11J
+   [27/31] Bruno... ⚪ Sem dados
+   [28/31] Weverton... ✅ 0G 0A 26J
+   [29/31] Carlos Miguel... ✅ 0G 0A 9J
+   [30/31] Marcelo Lomba... ✅ 0G 0A 2J
+   [31/31] Aranha... ⚪ Sem dados
+
+[3/20] Corinthians
+----------------------------------------------------------------------
+🔍 Buscando elenco: Corinthians... ✅ 32 jogadores
+   [1/32] Memphis Depay... ✅ 6G 3A 22J
+   [2/32] Yuri Alberto... ✅ 10G 2A 26J
+   [3/32] Ángel Romero... ✅ 0G 1A 26J
+   [4/32] Talles Magno... ✅ 1G 1A 23J
+   [5/32] Gui Negão... ✅ 3G 1A 22J
+   [6/32] Vitinho... ✅ 0G 3A 12J
+   [7/32] Héctor Hernández... ✅ 1G 0A 9J
+   [8/32] Kayke Ferrari... ✅ 0G 0A 7J
+   [9/32] Rodrigo Garro... ✅ 0G 3A 19J
+   [10/32] André Carrillo... ✅ 1G 0A 21J
+   [11/32] Breno Bidon... ✅ 1G 1A 33J
+   [12/32] José Martínez... ✅ 0G 1A 23J
+   [13/32] Raniele... ✅ 2G 1A 29J
+   [14/32] Maycon... ✅ 3G 0A 25J
+   [15/32] Charles... ✅ 1G 0A 16J
+   [16/32] Ryan Gustavo... ✅ 0G 0A 16J
+   [17/32] Dieguinho... ✅ 0G 1A 12J
+   [18/32] Bahia... ✅ 0G 0A 2J
+   [19/32] André Luiz... ✅ 2G 0A 8J
+   [20/32] Matheuzinho... ✅ 2G 3A 30J
+   [21/32] Félix Torres... ✅ 0G 0A 9J
+   [22/32] Matheus Bidu... ✅ 0G 2A 26J
+   [23/32] André Ramalho... ✅ 0G 0A 21J
+   [24/32] Gustavo Henrique... ✅ 3G 0A 23J
+   [25/32] Cacá... ✅ 2G 0A 18J
+   [26/32] Fabrizio Angileri... ✅ 0G 0A 27J
+   [27/32] Hugo... ✅ 0G 0A 9J
+   [28/32] João Pedro Tchoca... ✅ 0G 1A 15J
+   [29/32] Hugo Souza... ✅ 0G 0A 26J
+   [30/32] Matheus Donelli... ✅ 0G 0A 5J
+   [31/32] Felipe Longo... ✅ 0G 0A 6J
+   [32/32] Kauê... ⚪ Sem dados
+
+[4/20] São Paulo
+----------------------------------------------------------------------
+🔍 Buscando elenco: São Paulo... ✅ 37 jogadores
+   [1/37] Jonathan Calleri... ✅ 0G 0A 3J
+   [2/37] Gonzalo Tapia... ✅ 5G 0A 19J
+   [3/37] Ryan Francisco... ✅ 2G 0A 8J
+   [4/37] Juan Dinenno... ✅ 1G 0A 8J
+   [5/37] André Silva... ✅ 5G 2A 20J
+   [6/37] Paulo Sergio Venuto Bezerra... ⚪ Sem dados
+   [7/37] Oscar... ✅ 0G 0A 6J
+   [8/37] Lucas Moura... ✅ 2G 0A 11J
+   [9/37] Ferreirinha... ✅ 5G 4A 27J
+   [10/37] Luciano... ✅ 9G 4A 31J
+   [11/37] Pablo Maia... ✅ 1G 0A 24J
+   [12/37] Damián Bobadilla... ✅ 4G 2A 31J
+   [13/37] Alisson... ✅ 0G 1A 30J
+   [14/37] Cédric Soares... ✅ 0G 3A 24J
+   [15/37] Luan Santos... ✅ 0G 0A 6J
+   [16/37] Marcos Antônio... ✅ 0G 4A 27J
+   [17/37] Luiz Gustavo... ✅ 1G 0A 11J
+   [18/37] Rodriguinho... ✅ 0G 0A 18J
+   [19/37] Emiliano Rigoni... ✅ 1G 0A 9J
+   [20/37] Lucca... ✅ 0G 0A 7J
+   [21/37] Felipe Negrucci... ✅ 0G 0A 5J
+   [22/37] Pedro Henrique Ferreira da Silva... ⚪ Sem dados
+   [23/37] Robert Arboleda... ✅ 3G 0A 23J
+   [24/37] Nahuel Ferraresi... ✅ 0G 3A 24J
+   [25/37] Wendell... ✅ 0G 1A 16J
+   [26/37] Alan Franco... ✅ 0G 0A 29J
+   [27/37] Enzo Díaz... ✅ 0G 5A 27J
+   [28/37] Rafael Tolói... ✅ 0G 0A 6J
+   [29/37] Sabino... ✅ 2G 0A 29J
+   [30/37] Patryck... ✅ 0G 0A 5J
+   [31/37] Maik... ✅ 2G 2A 9J
+   [32/37] Matheus Belém... ⚪ Sem dados
+   [33/37] Maílton... ✅ 0G 0A 8J
+   [34/37] Rafael... ✅ 0G 0A 34J
+   [35/37] Young... ✅ 0G 0A 3J
+   [36/37] Leandro Mathias... ⚪ Sem dados
+   [37/37] Felipe Gabriel Preis... ⚪ Sem dados
+
+[5/20] Grêmio
+----------------------------------------------------------------------
+🔍 Buscando elenco: Grêmio... ✅ 40 jogadores
+   [1/40] Willian... ✅ 1G 2A 5J
+   [2/40] Martin Braithwaite... ✅ 6G 1A 18J
+   [3/40] Carlos Vinícius... ✅ 10G 1A 13J
+   [4/40] André Henrique... ✅ 5G 2A 24J
+   [5/40] Arthur... ✅ 0G 0A 13J
+   [6/40] Gabriel Mec... ⚪ Sem dados
+   [7/40] Alexander Aravena... ✅ 3G 0A 22J
+   [8/40] Mathias Villasanti... ✅ 0G 0A 16J
+   [9/40] Alex Santana... ✅ 0G 0A 11J
+   [10/40] Cristian Pavón... ✅ 0G 4A 27J
+   [11/40] Franco Cristaldo... ✅ 0G 2A 29J
+   [12/40] Miguel Monsalve... ✅ 0G 1A 9J
+   [13/40] Cristian Olivera... ✅ 2G 0A 22J
+   [14/40] Gustavo Cuéllar... ✅ 0G 0A 16J
+   [15/40] Francis Amuzu... ✅ 4G 2A 21J
+   [16/40] Edenilson... ✅ 3G 1A 30J
+   [17/40] Alysson... ✅ 1G 2A 30J
+   [18/40] Dodi... ✅ 0G 1A 32J
+   [19/40] Camilo... ✅ 0G 0A 15J
+   [20/40] Riquelme Freitas... ✅ 0G 0A 10J
+   [21/40] Lucas Milla... ⚪ Sem dados
+   [22/40] Erick Noriega... ✅ 0G 0A 14J
+   [23/40] Marcos Rocha... ✅ 0G 0A 12J
+   [24/40] Walter Kannemann... ✅ 0G 0A 20J
+   [25/40] Marlon... ✅ 1G 2A 31J
+   [26/40] Fabián Balbuena... ✅ 1G 0A 3J
+   [27/40] Jemerson... ✅ 1G 0A 9J
+   [28/40] Wagner Leonardo... ✅ 0G 2A 28J
+   [29/40] Gustavo Martins... ✅ 1G 0A 18J
+   [30/40] João Pedro... ✅ 0G 0A 7J
+   [31/40] Lucas Esteves... ✅ 0G 0A 9J
+   [32/40] Rodrigo Ely... ✅ 0G 0A 2J
+   [33/40] João Lucas... ✅ 0G 0A 10J
+   [34/40] Viery... ✅ 0G 0A 3J
+   [35/40] Mayk Silva... ⚪ Sem dados
+   [36/40] Enzo... ⚪ Sem dados
+   [37/40] Luis Eduardo... ⚪ Sem dados
+   [38/40] Tiago Volpi... ✅ 2G 0A 32J
+   [39/40] Gabriel Grando... ✅ 0G 0A 5J
+   [40/40] Jorge Bartholdy... ⚪ Sem dados
+
+[6/20] Internacional
+----------------------------------------------------------------------
+🔍 Buscando elenco: Internacional... ✅ 38 jogadores
+   [1/38] Rafael Borré... ✅ 5G 2A 29J
+   [2/38] Johan Carbonero... ✅ 4G 2A 22J
+   [3/38] Ricardo Mathias... ✅ 5G 0A 21J
+   [4/38] Lucca Drummond... ⚪ Sem dados
+   [5/38] Leandro Kauã... ⚪ Sem dados
+   [6/38] Eduardo Henrique Lopes Ferreira... ⚪ Sem dados
+   [7/38] Alan Patrick... ✅ 10G 7A 29J
+   [8/38] Óscar Romero... ✅ 0G 1A 17J
+   [9/38] Thiago Maia... ✅ 2G 1A 30J
+   [10/38] Bruno Tabata... ✅ 3G 0A 24J
+   [11/38] Vitinho... ✅ 5G 1A 26J
+   [12/38] Bruno Henrique... ✅ 2G 0A 28J
+   [13/38] Gustavo Prado... ✅ 1G 0A 18J
+   [14/38] Ronaldo... ✅ 0G 0A 15J
+   [15/38] Alan Rodríguez... ✅ 0G 1A 14J
+   [16/38] Luis Otávio... ✅ 0G 0A 20J
+   [17/38] Richard Cândido... ✅ 0G 0A 6J
+   [18/38] Yago Noal... ✅ 0G 0A 2J
+   [19/38] Alisson Rodrigues de Melo... ✅ 0G 0A 1J
+   [20/38] Gustavo dos Santos... ⚪ Sem dados
+   [21/38] Allex... ⚪ Sem dados
+   [22/38] Henrique de Aguiar de Mendonça... ⚪ Sem dados
+   [23/38] Alexandro Bernabei... ✅ 0G 4A 29J
+   [24/38] Vitão... ✅ 0G 1A 30J
+   [25/38] Gabriel Mercado... ✅ 0G 0A 13J
+   [26/38] Bruno Gomes... ✅ 0G 2A 13J
+   [27/38] Braian Aguirre... ✅ 1G 0A 29J
+   [28/38] Victor Gabriel... ✅ 2G 0A 14J
+   [29/38] Juninho... ✅ 0G 0A 19J
+   [30/38] Alan Benítez... ✅ 0G 0A 11J
+   [31/38] Clayton Sampaio... ✅ 0G 0A 11J
+   [32/38] Pablo Pereira da Costa... ⚪ Sem dados
+   [33/38] Yan Henrique... ⚪ Sem dados
+   [34/38] Esley Ezequiel dos Reis... ⚪ Sem dados
+   [35/38] Sergio Rochet... ✅ 0G 0A 14J
+   [36/38] Ivan Quaresma... ✅ 0G 0A 7J
+   [37/38] Anthoni... ✅ 0G 0A 18J
+   [38/38] Kauan... ⚪ Sem dados
+
+[7/20] Fluminense
+----------------------------------------------------------------------
+🔍 Buscando elenco: Fluminense... ✅ 34 jogadores
+   [1/34] Germán Cano... ✅ 6G 0A 22J
+   [2/34] John Kennedy... ✅ 2G 1A 16J
+   [3/34] Everaldo... ✅ 2G 0A 27J
+   [4/34] Joaquín Lavega... ✅ 0G 0A 2J
+   [5/34] Yeferson Soteldo... ✅ 2G 1A 21J
+   [6/34] Matheus Martinelli... ✅ 3G 2A 32J
+   [7/34] Ganso... ✅ 0G 0A 16J
+   [8/34] Kevin Serna... ✅ 7G 5A 32J
+   [9/34] Hércules... ✅ 3G 1A 33J
+   [10/34] Agustín Canobbio... ✅ 4G 2A 29J
+   [11/34] Luciano Acosta... ✅ 3G 2A 15J
+   [12/34] Keno... ✅ 1G 2A 18J
+   [13/34] Facundo Bernal... ✅ 0G 0A 21J
+   [14/34] Nonato... ✅ 2G 1A 19J
+   [15/34] Lima... ✅ 2G 1A 28J
+   [16/34] Ruben Lezcano... ✅ 0G 0A 4J
+   [17/34] Otávio... ✅ 0G 0A 6J
+   [18/34] Riquelme Felipe... ✅ 0G 0A 6J
+   [19/34] Santiago Moreno... ✅ 0G 0A 5J
+   [20/34] Wallace Davi... ⚪ Sem dados
+   [21/34] Thiago Silva... ✅ 1G 0A 24J
+   [22/34] Ignácio... ✅ 0G 0A 19J
+   [23/34] Gabriel Fuentes... ✅ 0G 0A 11J
+   [24/34] Samuel Xavier... ✅ 4G 1A 28J
+   [25/34] Renê... ✅ 2G 0A 27J
+   [26/34] Juan Freytes... ✅ 0G 0A 32J
+   [27/34] Guga... ✅ 1G 1A 17J
+   [28/34] Thiago Santos... ✅ 0G 0A 10J
+   [29/34] Igor Rabello... ✅ 0G 0A 8J
+   [30/34] Manoel... ✅ 0G 0A 5J
+   [31/34] Leonardo de Oliveira Jance... ⚪ Sem dados
+   [32/34] Fábio... ✅ 0G 0A 37J
+   [33/34] Marcelo Pitaluga... ⚪ Sem dados
+   [34/34] Vitor Eudes... ⚪ Sem dados
+
+[8/20] Atlético Mineiro
+----------------------------------------------------------------------
+🔍 Buscando elenco: Atlético Mineiro... ✅ 38 jogadores
+   [1/38] Hulk... ✅ 7G 5A 32J
+   [2/38] Reinier... ✅ 0G 0A 13J
+   [3/38] Dudu... ✅ 2G 2A 22J
+   [4/38] Rony... ✅ 6G 4A 34J
+   [5/38] Júnior Santos... ✅ 2G 0A 16J
+   [6/38] Biel... ✅ 1G 2A 17J
+   [7/38] Cadu... ✅ 0G 0A 1J
+   [8/38] João Marcelo... ✅ 1G 1A 7J
+   [9/38] Isaac... ✅ 0G 0A 1J
+   [10/38] Caio Maia... ⚪ Sem dados
+   [11/38] Gustavo Scarpa... ✅ 1G 3A 35J
+   [12/38] Alan Franco... ✅ 1G 0A 29J
+   [13/38] Gabriel Menino... ✅ 1G 1A 22J
+   [14/38] Bernard... ✅ 1G 1A 29J
+   [15/38] Fausto Vera... ✅ 1G 0A 18J
+   [16/38] Alexsander... ✅ 1G 0A 13J
+   [17/38] Tomás Cuello... ✅ 1G 1A 15J
+   [18/38] Igor Gomes... ✅ 4G 1A 33J
+   [19/38] Patrick... ✅ 0G 0A 3J
+   [20/38] Mateus Jose Iseppe... ✅ 0G 0A 1J
+   [21/38] David Kauã... ⚪ Sem dados
+   [22/38] Wallyson Breno Freitas da Silva... ⚪ Sem dados
+   [23/38] Victinho... ⚪ Sem dados
+   [24/38] Guilherme Arana... ✅ 1G 1A 24J
+   [25/38] Lyanco... ✅ 0G 0A 17J
+   [26/38] Iván Román... ✅ 0G 0A 12J
+   [27/38] Junior Alonso... ✅ 0G 1A 30J
+   [28/38] Caio Paulista... ✅ 0G 0A 20J
+   [29/38] Renzo Saravia... ✅ 0G 0A 18J
+   [30/38] Ruan... ✅ 1G 0A 15J
+   [31/38] Natanael... ✅ 1G 0A 34J
+   [32/38] Vitor Hugo... ✅ 3G 0A 22J
+   [33/38] Vitor Fernandes Chaves Teixeira... ⚪ Sem dados
+   [34/38] Pedro Tocantins... ⚪ Sem dados
+   [35/38] Everson... ✅ 0G 0A 35J
+   [36/38] Gabriel Delfim... ✅ 0G 0A 2J
+   [37/38] Robert Alves... ⚪ Sem dados
+   [38/38] Gabriel Atila... ⚪ Sem dados
+
+[9/20] Cruzeiro
+----------------------------------------------------------------------
+🔍 Buscando elenco: Cruzeiro... ✅ 34 jogadores
+   [1/34] Gabriel Barbosa... ✅ 6G 2A 29J
+   [2/34] Kaio Jorge... ✅ 21G 8A 33J
+   [3/34] Luis Sinisterra... ✅ 2G 1A 11J
+   [4/34] Yannick Bolasie... ✅ 0G 1A 17J
+   [5/34] Matheus Pereira... ✅ 7G 7A 34J
+   [6/34] Keny Arroyo... ✅ 2G 1A 12J
+   [7/34] Marquinhos... ✅ 0G 0A 17J
+   [8/34] Matheus Henrique... ✅ 0G 0A 16J
+   [9/34] Lucas Romero... ✅ 1G 3A 33J
+   [10/34] Lucas Silva... ✅ 2G 2A 34J
+   [11/34] Eduardo... ✅ 1G 0A 28J
+   [12/34] Wanderson... ✅ 0G 2A 27J
+   [13/34] Christian... ✅ 5G 2A 30J
+   [14/34] Walace... ✅ 0G 0A 16J
+   [15/34] Kaique Kenji... ✅ 0G 0A 2J
+   [16/34] Japa... ✅ 0G 0A 4J
+   [17/34] Murilo Rhikman... ✅ 0G 0A 1J
+   [18/34] Ryan Guilherme... ✅ 0G 0A 2J
+   [19/34] Ian Luccas... ⚪ Sem dados
+   [20/34] Fabrício Bruno... ✅ 3G 0A 33J
+   [21/34] Fagner... ✅ 0G 0A 9J
+   [22/34] William... ✅ 0G 6A 30J
+   [23/34] Kaiki... ✅ 1G 5A 34J
+   [24/34] Lucas Villalba... ✅ 1G 0A 32J
+   [25/34] João Marcelo... ✅ 0G 0A 3J
+   [26/34] Jonathan Jesus... ✅ 0G 1A 12J
+   [27/34] Kauã Prates... ✅ 0G 0A 7J
+   [28/34] Mateo Gamarra... ✅ 0G 0A 2J
+   [29/34] Kauã Moraes... ✅ 0G 0A 5J
+   [30/34] José Janderson... ✅ 0G 0A 1J
+   [31/34] Nicolas Pontes... ⚪ Sem dados
+   [32/34] Cássio... ✅ 0G 0A 35J
+   [33/34] Léo Aragão... ✅ 0G 0A 3J
+   [34/34] Otávio Costa... ⚪ Sem dados
+
+[10/20] Botafogo
+----------------------------------------------------------------------
+🔍 Buscando elenco: Botafogo... ✅ 36 jogadores
+   [1/36] Joaquín Correa... ✅ 2G 0A 18J
+   [2/36] Arthur Cabral... ✅ 3G 2A 20J
+   [3/36] Matheus Martins... ✅ 1G 0A 15J
+   [4/36] Gonzalo Mastriani... ✅ 1G 0A 12J
+   [5/36] Chris Ramos... ✅ 4G 0A 13J
+   [6/36] Nathan Fernandes... ✅ 1G 2A 10J
+   [7/36] Jefferson Savarino... ✅ 4G 3A 27J
+   [8/36] Danilo... ✅ 1G 3A 13J
+   [9/36] Álvaro Montoro... ✅ 2G 3A 15J
+   [10/36] Allan... ✅ 0G 0A 20J
+   [11/36] Artur... ✅ 5G 4A 27J
+   [12/36] Marlon Freitas... ✅ 1G 4A 34J
+   [13/36] Jordan Barrera... ✅ 1G 0A 5J
+   [14/36] Santiago Rodríguez... ✅ 2G 4A 25J
+   [15/36] Jeffinho... ✅ 2G 4A 17J
+   [16/36] Newton... ✅ 1G 0A 24J
+   [17/36] Diego Hernández... ⚪ Sem dados
+   [18/36] Alex Telles... ✅ 5G 4A 26J
+   [19/36] Bastos... ⚪ Sem dados
+   [20/36] Vitinho... ✅ 1G 1A 35J
+   [21/36] Alexander Barboza... ✅ 0G 0A 24J
+   [22/36] Cuiabano... ✅ 5G 2A 29J
+   [23/36] Mateo Ponte... ✅ 1G 0A 20J
+   [24/36] Marçal... ✅ 4G 0A 14J
+   [25/36] David Ricardo... ✅ 1G 1A 22J
+   [26/36] Kaio Pantaleão... ✅ 0G 0A 11J
+   [27/36] Philipe Sampaio... ⚪ Sem dados
+   [28/36] Gabriel Bahia... ✅ 0G 0A 3J
+   [29/36] Gabriel Da Silva Abdias... ⚪ Sem dados
+   [30/36] Gabriel Justino... ⚪ Sem dados
+   [31/36] Neto... ✅ 0G 0A 3J
+   [32/36] Léo Linck... ✅ 0G 0A 17J
+   [33/36] Cristhian Loor... ⚪ Sem dados
+   [34/36] Raúl... ✅ 0G 0A 1J
+   [35/36] Rhyan... ⚪ Sem dados
+   [36/36] Cleber Lucas... ⚪ Sem dados
+
+[11/20] Vasco da Gama
+----------------------------------------------------------------------
+🔍 Buscando elenco: Vasco da Gama... ✅ 37 jogadores
+   [1/37] Pablo Vegetti... ✅ 14G 1A 34J
+   [2/37] Matheus França... ✅ 0G 0A 14J
+   [3/37] Gabriel Souza... ✅ 2G 0A 11J
+   [4/37] Cauã Paixão... ⚪ Sem dados
+   [5/37] Philippe Coutinho... ✅ 5G 3A 30J
+   [6/37] Rayan... ✅ 14G 1A 34J
+   [7/37] Nuno Moreira... ✅ 7G 5A 36J
+   [8/37] Tchê Tchê... ✅ 1G 0A 28J
+   [9/37] Andrés Gómez... ✅ 1G 5A 16J
+   [10/37] David... ✅ 2G 3A 23J
+   [11/37] Adson... ✅ 0G 0A 10J
+   [12/37] Hugo Moura... ✅ 0G 1A 32J
+   [13/37] Paulinho Paula... ✅ 0G 0A 10J
+   [14/37] Jair... ✅ 0G 0A 11J
+   [15/37] Guilherme Estrella... ⚪ Sem dados
+   [16/37] Cauan Barros... ✅ 1G 0A 17J
+   [17/37] Mateus Carvalho... ✅ 0G 0A 18J
+   [18/37] Benjamín Garré... ✅ 0G 0A 10J
+   [19/37] Thiago Mendes... ✅ 0G 0A 8J
+   [20/37] Jean Meneses... ✅ 0G 0A 1J
+   [21/37] Leandrinho... ✅ 0G 0A 1J
+   [22/37] Lucas Oliveira... ✅ 0G 0A 7J
+   [23/37] Paulo Henrique... ✅ 1G 8A 28J
+   [24/37] Carlos Cuesta... ✅ 1G 0A 13J
+   [25/37] Lucas Piton... ✅ 1G 7A 30J
+   [26/37] Robert Renan... ✅ 0G 0A 15J
+   [27/37] Puma Rodríguez... ✅ 2G 2A 24J
+   [28/37] Mauricio Lemos... ✅ 0G 0A 4J
+   [29/37] Lucas Freitas... ✅ 1G 0A 20J
+   [30/37] Victor Luis... ✅ 0G 0A 6J
+   [31/37] Riquelme... ⚪ Sem dados
+   [32/37] Paulinho... ⚪ Sem dados
+   [33/37] Léo Jardim... ✅ 0G 0A 36J
+   [34/37] Daniel Fuzato... ✅ 0G 0A 2J
+   [35/37] Pablo... ⚪ Sem dados
+   [36/37] Alexander de Lucena... ⚪ Sem dados
+   [37/37] Diego Campos Minete... ⚪ Sem dados
+
+[12/20] Santos
+----------------------------------------------------------------------
+🔍 Buscando elenco: Santos... ✅ 34 jogadores
+   [1/34] Neymar... ✅ 8G 1A 19J
+   [2/34] Tiquinho Soares... ✅ 2G 3A 26J
+   [3/34] Billal Brahimi... ✅ 0G 0A 1J
+   [4/34] Lautaro Díaz... ✅ 3G 2A 21J
+   [5/34] Andrey Quintino... ⚪ Sem dados
+   [6/34] Robinho Júnior... ✅ 0G 1A 14J
+   [7/34] Benjamín Rollheiser... ✅ 2G 3A 35J
+   [8/34] Guilherme... ✅ 4G 5A 31J
+   [9/34] Victor Hugo... ✅ 0G 0A 10J
+   [10/34] Tomás Rincón... ✅ 0G 0A 16J
+   [11/34] Zé Rafael... ✅ 1G 0A 27J
+   [12/34] Álvaro Barreal... ✅ 9G 1A 33J
+   [13/34] Willian Arão... ✅ 0G 0A 12J
+   [14/34] Thaciano... ✅ 1G 0A 18J
+   [15/34] Gabriel Bontempo... ✅ 2G 1A 24J
+   [16/34] João Schmidt... ✅ 1G 2A 30J
+   [17/34] Gustavo Caballero... ✅ 1G 1A 12J
+   [18/34] Hyan... ✅ 0G 0A 2J
+   [19/34] Mateus Xavier de Sousa... ✅ 0G 0A 3J
+   [20/34] Pedro Padula... ⚪ Sem dados
+   [21/34] Mayke... ✅ 0G 0A 15J
+   [22/34] Igor Vinícius... ✅ 0G 1A 22J
+   [23/34] Souza... ✅ 1G 2A 23J
+   [24/34] João Pedro Chermont... ✅ 0G 0A 5J
+   [25/34] Zé Ivaldo... ✅ 1G 0A 20J
+   [26/34] Luan Peres... ✅ 0G 0A 24J
+   [27/34] Gonzalo Escobar... ✅ 0G 0A 30J
+   [28/34] Alexis Duarte... ✅ 0G 0A 5J
+   [29/34] João Basso... ✅ 1G 0A 6J
+   [30/34] Adonis Frías... ✅ 0G 0A 12J
+   [31/34] Luis Fellipe... ✅ 0G 0A 6J
+   [32/34] Vinicius Rodrigues Lira... ⚪ Sem dados
+   [33/34] Gabriel Brazão... ✅ 0G 0A 37J
+   [34/34] Diogenes... ✅ 0G 0A 1J
+
+[13/20] Athletico Paranaense
+----------------------------------------------------------------------
+🔍 Buscando elenco: Athletico Paranaense... ✅ 41 jogadores
+   [1/41] Gonçalo Paciência... ✅ 0G 0A 5J
+   [2/41] Pablo... ✅ 3G 1A 21J
+   [3/41] Derik Lacerda... ✅ 6G 0A 17J
+   [4/41] Juan Ignacio Ramírez... ✅ 0G 0A 8J
+   [5/41] Zé Roberto... ⚪ Sem dados
+   [6/41] Zé Lucas... ✅ 0G 0A 24J
+   [7/41] Lucas Lima... ✅ 3G 6A 32J
+   [8/41] Sérgio Oliveira... ✅ 1G 1A 18J
+   [9/41] Chrystian Barletta... ✅ 2G 0A 33J
+   [10/41] Christian Rivera... ✅ 0G 0A 33J
+   [11/41] Romarinho... ✅ 2G 0A 25J
+   [12/41] Carlos Alberto... ✅ 0G 0A 9J
+   [13/41] Hyoran... ✅ 0G 1A 12J
+   [14/41] Rodrigo Atencio... ✅ 0G 0A 19J
+   [15/41] Matheusinho... ✅ 2G 2A 24J
+   [16/41] Gustavo Maia... ✅ 0G 0A 1J
+   [17/41] Léo Pereira... ✅ 3G 1A 21J
+   [18/41] Pedro Augusto... ✅ 0G 0A 13J
+   [19/41] Lucas Kal... ✅ 0G 0A 12J
+   [20/41] Pedro Victor Martins... ⚪ Sem dados
+   [21/41] Lucas Andre... ⚪ Sem dados
+   [22/41] Luan Cândido... ✅ 1G 0A 15J
+   [23/41] Kevyson... ✅ 0G 0A 10J
+   [24/41] Aderlan... ✅ 0G 0A 16J
+   [25/41] Rafael Thyere... ✅ 1G 0A 23J
+   [26/41] Igor Cariús... ✅ 1G 0A 27J
+   [27/41] Matheus Alexandre... ✅ 0G 1A 25J
+   [28/41] João Silva... ✅ 0G 0A 13J
+   [29/41] Ramon Menezes... ✅ 1G 0A 23J
+   [30/41] Diogo Hereda... ✅ 0G 1A 11J
+   [31/41] Felipinho... ✅ 0G 0A 5J
+   [32/41] Lucas Cunha... ✅ 0G 0A 6J
+   [33/41] Renzo... ⚪ Sem dados
+   [34/41] Victor Hugo... ✅ 0G 0A 1J
+   [35/41] Cauã Berrio... ⚪ Sem dados
+   [36/41] Victor Hugo... ⚪ Sem dados
+   [37/41] Felype Gabriel Alencar Carvalho... ⚪ Sem dados
+   [38/41] Caíque França... ✅ 0G 0A 14J
+   [39/41] Gabriel Vasconcelos... ✅ 0G 0A 24J
+   [40/41] Denis... ⚪ Sem dados
+   [41/41] Victor Hugo... ⚪ Sem dados
+
+[14/20] Bahia
+----------------------------------------------------------------------
+🔍 Buscando elenco: Bahia... ✅ 34 jogadores
+   [1/34] Willian José... ✅ 11G 6A 32J
+   [2/34] Ademir... ✅ 2G 6A 29J
+   [3/34] Tiago Souza... ✅ 3G 2A 24J
+   [4/34] Kaue Furquim... ⚪ Sem dados
+   [5/34] Everton Ribeiro... ✅ 2G 4A 30J
+   [6/34] Erick Pulga... ✅ 3G 3A 23J
+   [7/34] Jean Lucas... ✅ 3G 1A 33J
+   [8/34] Kayky... ✅ 1G 2A 26J
+   [9/34] Cauly... ✅ 1G 3A 28J
+   [10/34] Rodrigo Nestor... ✅ 5G 0A 21J
+   [11/34] Caio Alexandre... ✅ 0G 1A 20J
+   [12/34] Michel Araújo... ✅ 4G 1A 24J
+   [13/34] Ruan Pablo... ✅ 0G 0A 4J
+   [14/34] Erick... ✅ 1G 0A 16J
+   [15/34] Nicolás Acevedo... ✅ 0G 1A 31J
+   [16/34] Mateo  Sanabria... ✅ 1G 0A 10J
+   [17/34] David Martins... ⚪ Sem dados
+   [18/34] Santiago Arias... ✅ 0G 0A 20J
+   [19/34] Luciano Juba... ✅ 6G 4A 34J
+   [20/34] Santiago Ramos Mingo... ✅ 0G 0A 32J
+   [21/34] Gilberto... ✅ 1G 0A 23J
+   [22/34] Gabriel Xavier... ✅ 0G 0A 13J
+   [23/34] Kanu... ✅ 0G 0A 6J
+   [24/34] Luiz Gustavo... ✅ 0G 0A 5J
+   [25/34] Iago Borduchi... ✅ 1G 0A 15J
+   [26/34] David Duarte... ✅ 1G 1A 25J
+   [27/34] Rezende... ✅ 0G 0A 11J
+   [28/34] André Dhominique... ⚪ Sem dados
+   [29/34] Frederico Lippert Neto Gomes... ⚪ Sem dados
+   [30/34] João Paulo... ⚪ Sem dados
+   [31/34] Ronaldo... ✅ 0G 1A 27J
+   [32/34] Danilo Fernandes... ⚪ Sem dados
+   [33/34] Gabriel Souza... ⚪ Sem dados
+   [34/34] Victor Nascimento... ⚪ Sem dados
+
+[15/20] Fortaleza
+----------------------------------------------------------------------
+🔍 Buscando elenco: Fortaleza... ✅ 40 jogadores
+   [1/40] Deyverson... ✅ 7G 0A 26J
+   [2/40] Juan Martín Lucero... ✅ 3G 1A 27J
+   [3/40] Adam Bareiro... ✅ 6G 1A 20J
+   [4/40] Kayke... ✅ 0G 0A 2J
+   [5/40] José Herrera... ✅ 2G 3A 19J
+   [6/40] Marinho... ✅ 1G 2A 17J
+   [7/40] Yago Pikachu... ✅ 2G 1A 30J
+   [8/40] Breno Lopes... ✅ 5G 3A 31J
+   [9/40] Matheus Pereira... ✅ 1G 3A 19J
+   [10/40] Tomás Pochettino... ✅ 3G 4A 25J
+   [11/40] Yeison Guzmán... ✅ 0G 0A 5J
+   [12/40] Moisés... ✅ 0G 1A 12J
+   [13/40] Emmanuel Martínez... ✅ 1G 1A 14J
+   [14/40] Lucas Sasha... ✅ 1G 0A 30J
+   [15/40] Lucas Crispim... ✅ 1G 1A 9J
+   [16/40] Matheus Rossetto... ✅ 0G 0A 19J
+   [17/40] Zé Welison... ✅ 0G 0A 9J
+   [18/40] Allanzinho... ✅ 0G 2A 9J
+   [19/40] Pierre... ✅ 0G 0A 12J
+   [20/40] Pablo... ✅ 0G 0A 5J
+   [21/40] Lucca Prior... ✅ 2G 0A 12J
+   [22/40] Rodrigo Santos... ✅ 0G 0A 7J
+   [23/40] Pierre... ⚪ Sem dados
+   [24/40] Benjamin Kuscevic... ✅ 1G 0A 20J
+   [25/40] Gastón Ávila... ✅ 0G 0A 26J
+   [26/40] Diogo Barbosa... ✅ 1G 0A 18J
+   [27/40] Emanuel Brítez... ✅ 0G 1A 18J
+   [28/40] Eros Mancuso... ✅ 1G 3A 29J
+   [29/40] Tinga... ✅ 1G 0A 11J
+   [30/40] Bruno Pacheco... ✅ 1G 1A 15J
+   [31/40] Marcelo Benevenuto... ⚪ Sem dados
+   [32/40] Lucas Gazal... ✅ 0G 1A 6J
+   [33/40] Weverson... ✅ 0G 0A 3J
+   [34/40] Lucas Gazal... ⚪ Sem dados
+   [35/40] Guilherme Cristovam dos Santos... ⚪ Sem dados
+   [36/40] João Ricardo... ✅ 0G 0A 14J
+   [37/40] Brenno... ✅ 0G 0A 14J
+   [38/40] Helton Leite... ✅ 0G 0A 4J
+   [39/40] Vinicius Silvestre... ✅ 0G 0A 2J
+   [40/40] Magrão... ✅ 0G 0A 3J
+
+[16/20] Bragantino
+----------------------------------------------------------------------
+🔍 Buscando elenco: Bragantino... ✅ 37 jogadores
+   [1/37] Isidro Pitta... ✅ 7G 2A 23J
+   [2/37] Eduardo Sasha... ✅ 8G 3A 32J
+   [3/37] Thiago Borbas... ✅ 1G 1A 19J
+   [4/37] Fernando... ✅ 0G 0A 13J
+   [5/37] Henry Mosquera... ✅ 0G 0A 17J
+   [6/37] Arthur Sousa... ✅ 0G 0A 6J
+   [7/37] Vinicinho... ✅ 0G 2A 22J
+   [8/37] Bruno Goncalves De Jesus... ⚪ Sem dados
+   [9/37] Kawê... ⚪ Sem dados
+   [10/37] Jhon Jhon... ✅ 9G 7A 33J
+   [11/37] Fabinho... ✅ 0G 1A 28J
+   [12/37] Matheus Fernandes... ✅ 1G 0A 19J
+   [13/37] Lucas Barbosa... ✅ 4G 3A 33J
+   [14/37] Ignacio Laquintana... ✅ 4G 3A 23J
+   [15/37] Gabriel Girotto... ✅ 1G 0A 32J
+   [16/37] Bruno Praxedes... ✅ 0G 0A 15J
+   [17/37] Eric Ramires... ✅ 2G 1A 30J
+   [18/37] Vitinho... ⚪ Sem dados
+   [19/37] Gustavo Neves... ✅ 0G 0A 16J
+   [20/37] João Neto... ⚪ Sem dados
+   [21/37] Davi Gomes... ✅ 1G 0A 7J
+   [22/37] Vanderlan... ✅ 0G 1A 17J
+   [23/37] Juninho Capixaba... ✅ 1G 1A 23J
+   [24/37] José Andrés Hurtado... ✅ 1G 0A 27J
+   [25/37] Guzmán Rodríguez... ✅ 1G 0A 23J
+   [26/37] Pedro Henrique... ✅ 1G 1A 31J
+   [27/37] Gustavo Marques... ✅ 1G 0A 13J
+   [28/37] Alix Vinicius... ✅ 0G 0A 10J
+   [29/37] Agustin Sant'Anna... ✅ 0G 0A 11J
+   [30/37] Nathan Mendes... ✅ 0G 1A 18J
+   [31/37] Sergio Palacios... ✅ 0G 0A 2J
+   [32/37] Eduardo Santos... ✅ 0G 0A 8J
+   [33/37] Guilherme Lopes... ✅ 1G 1A 11J
+   [34/37] Cleiton... ✅ 0G 0A 33J
+   [35/37] Lucão... ✅ 0G 0A 4J
+   [36/37] Fabrício... ⚪ Sem dados
+   [37/37] Fernando Costa... ⚪ Sem dados
+
+[17/20] Cuiabá
+----------------------------------------------------------------------
+🔍 Buscando elenco: Cuiabá... ✅ 33 jogadores
+   [1/33] Chico da Costa... ✅ 6G 0A 20J
+   [2/33] Alesson... ✅ 5G 5A 25J
+   [3/33] Carlos Eduardo... ✅ 2G 5A 25J
+   [4/33] Cristian Renato... ✅ 4G 3A 31J
+   [5/33] Renato Marques... ✅ 1G 0A 6J
+   [6/33] Edson Carioca... ✅ 4G 2A 21J
+   [7/33] Gabriel... ✅ 4G 2A 25J
+   [8/33] Negueba... ✅ 7G 3A 32J
+   [9/33] Chico... ✅ 0G 0A 12J
+   [10/33] Roni... ✅ 0G 0A 9J
+   [11/33] Yago Felipe... ✅ 0G 1A 19J
+   [12/33] Shaylon... ✅ 0G 0A 13J
+   [13/33] Danielzinho... ✅ 0G 2A 36J
+   [14/33] Neto Moura... ✅ 1G 0A 33J
+   [15/33] Guilherme Marques... ✅ 2G 0A 11J
+   [16/33] José Aldo... ✅ 0G 1A 29J
+   [17/33] Maceió... ✅ 0G 0A 6J
+   [18/33] Matheus Sales... ⚪ Sem dados
+   [19/33] Matheus Bianqui... ✅ 0G 0A 13J
+   [20/33] Reinaldo... ✅ 13G 6A 34J
+   [21/33] Felipe Jonatan... ✅ 0G 0A 6J
+   [22/33] Jemmes... ✅ 2G 0A 36J
+   [23/33] Lucas Ramon... ✅ 2G 3A 30J
+   [24/33] João Victor... ✅ 2G 1A 33J
+   [25/33] Gabriel... ✅ 0G 0A 4J
+   [26/33] Daniel Borges... ✅ 2G 2A 16J
+   [27/33] Luiz Otávio... ✅ 0G 0A 4J
+   [28/33] Da Silva... ⚪ Sem dados
+   [29/33] Walter... ✅ 0G 0A 30J
+   [30/33] Alex Muralha... ✅ 0G 0A 7J
+   [31/33] Bruno Bertinato... ⚪ Sem dados
+   [32/33] Thomazella... ⚪ Sem dados
+   [33/33] Sidnei... ⚪ Sem dados
+
+[18/20] Juventude
+----------------------------------------------------------------------
+🔍 Buscando elenco: Juventude... ✅ 41 jogadores
+   [1/41] Gilberto... ✅ 2G 2A 23J
+   [2/41] Matheus Babi... ✅ 2G 0A 19J
+   [3/41] Gabriel Taliari... ✅ 8G 4A 33J
+   [4/41] Rafael Bilú... ✅ 1G 0A 15J
+   [5/41] Emerson Galego... ✅ 0G 0A 2J
+   [6/41] Gabriel Veron... ✅ 0G 0A 19J
+   [7/41] Juan Sforza... ✅ 0G 0A 10J
+   [8/41] Nenê... ✅ 3G 4A 24J
+   [9/41] Jádson... ✅ 0G 2A 34J
+   [10/41] Emerson Batalla... ✅ 4G 2A 22J
+   [11/41] Luis Mandaca... ✅ 2G 1A 31J
+   [12/41] Caique Gonçalves... ✅ 0G 1A 27J
+   [13/41] Ênio... ✅ 3G 0A 26J
+   [14/41] Lucas Fernandes... ✅ 0G 0A 7J
+   [15/41] Daniel Giraldo... ✅ 0G 0A 15J
+   [16/41] Giovanny... ✅ 0G 2A 18J
+   [17/41] Edison Negueba... ✅ 0G 0A 4J
+   [18/41] Peixoto... ✅ 1G 0A 12J
+   [19/41] Rafinha... ⚪ Sem dados
+   [20/41] Hudson... ✅ 0G 0A 4J
+   [21/41] Hudson Alexandre Batista da Silva... ⚪ Sem dados
+   [22/41] Roberson Cardoso... ⚪ Sem dados
+   [23/41] Wilker Ángel... ✅ 1G 0A 18J
+   [24/41] Alan Ruschel... ✅ 0G 0A 20J
+   [25/41] Natã... ✅ 0G 0A 2J
+   [26/41] Marcelo Hermes... ✅ 2G 4A 21J
+   [27/41] Abner... ✅ 0G 1A 19J
+   [28/41] Luan Freitas... ✅ 0G 1A 14J
+   [29/41] Igor Formiga... ✅ 2G 2A 18J
+   [30/41] Marcos Paulo... ✅ 0G 0A 19J
+   [31/41] Ewerthon... ✅ 1G 0A 17J
+   [32/41] Cipriano... ✅ 0G 0A 3J
+   [33/41] Rodrigo Sam... ✅ 1G 0A 17J
+   [34/41] Reginaldo... ✅ 0G 2A 18J
+   [35/41] Bernardo Tichz Toffolo... ⚪ Sem dados
+   [36/41] Matheus Henrique  Schroeder da Silva... ⚪ Sem dados
+   [37/41] Luiz Eduardo Linhares Abreu... ⚪ Sem dados
+   [38/41] Jandrei... ✅ 0G 0A 18J
+   [39/41] Gastón Guruceaga... ⚪ Sem dados
+   [40/41] Ruan Carneiro... ✅ 0G 0A 4J
+   [41/41] Ze Henrique... ⚪ Sem dados
+
+[19/20] Vitória
+----------------------------------------------------------------------
+🔍 Buscando elenco: Vitória... ✅ 43 jogadores
+   [1/43] Carlinhos... ✅ 1G 0A 6J
+   [2/43] Erick... ✅ 3G 5A 30J
+   [3/43] Renato Kayzer... ✅ 9G 0A 29J
+   [4/43] Aitor Cantalapiedra... ✅ 3G 3A 18J
+   [5/43] Fabrício Santos... ✅ 0G 1A 16J
+   [6/43] Renzo López... ✅ 1G 0A 22J
+   [7/43] Wendell dos Santos Sacramento... ✅ 0G 0A 1J
+   [8/43] Paulo Roberto... ✅ 0G 0A 2J
+   [9/43] Romarinho... ✅ 0G 0A 5J
+   [10/43] Matheuzinho... ✅ 4G 1A 28J
+   [11/43] Pepê... ✅ 0G 0A 14J
+   [12/43] Gabriel Baralhas... ✅ 1G 1A 27J
+   [13/43] Osvaldo... ✅ 0G 2A 27J
+   [14/43] Lucas Braga... ✅ 1G 0A 21J
+   [15/43] Dudu... ✅ 0G 0A 11J
+   [16/43] Ronald... ✅ 0G 2A 28J
+   [17/43] Kike Saverio... ✅ 0G 0A 2J
+   [18/43] Willian Oliveira... ✅ 1G 0A 19J
+   [19/43] Rúben Rodrigues... ✅ 0G 0A 4J
+   [20/43] Ricardo Ryller... ✅ 0G 0A 20J
+   [21/43] Felipe Cardoso... ✅ 0G 0A 3J
+   [22/43] Maykon Jesus... ✅ 0G 0A 9J
+   [23/43] Rúben Ramos Ismael... ✅ 0G 0A 1J
+   [24/43] Pablo Santos... ⚪ Sem dados
+   [25/43] Marco Antônio... ⚪ Sem dados
+   [26/43] Wanderson Papaterra Matos... ⚪ Sem dados
+   [27/43] Lucas Lohan dos Santos Verediana... ⚪ Sem dados
+   [28/43] Lucas Halter... ✅ 4G 1A 33J
+   [29/43] Ramon... ✅ 0G 0A 22J
+   [30/43] Claudinho... ✅ 0G 0A 15J
+   [31/43] Camutanga... ✅ 0G 0A 14J
+   [32/43] Jamerson... ✅ 0G 2A 12J
+   [33/43] Raúl Cáceres... ✅ 2G 2A 19J
+   [34/43] Zé Marcos... ✅ 1G 1A 27J
+   [35/43] Neris... ✅ 0G 0A 9J
+   [36/43] Edu... ✅ 0G 0A 20J
+   [37/43] Pedro Henrique Pinheiro de Jesus... ⚪ Sem dados
+   [38/43] Kauan... ⚪ Sem dados
+   [39/43] Lucas Arcanjo... ✅ 0G 0A 29J
+   [40/43] Thiago Couto... ✅ 0G 0A 8J
+   [41/43] Alexandre Fintelman... ⚪ Sem dados
+   [42/43] Yuri Sena... ⚪ Sem dados
+   [43/43] Davi Barbosa da Silva Novaes... ⚪ Sem dados
+
+[20/20] Atlético Goianiense
+----------------------------------------------------------------------
+🔍 Buscando elenco: Atlético Goianiense... ✅ 34 jogadores
+   [1/34] Pedro Raul... ✅ 10G 0A 33J
+   [2/34] Lucca... ✅ 0G 0A 5J
+   [3/34] Paulo Baya... ✅ 1G 1A 19J
+   [4/34] Aylon... ✅ 2G 0A 22J
+   [5/34] Guilherme Luiz... ✅ 0G 1A 7J
+   [6/34] Pedro Henrique... ✅ 4G 3A 27J
+   [7/34] Vina... ✅ 0G 1A 15J
+   [8/34] Matheus Araújo... ✅ 1G 1A 11J
+   [9/34] Antonio Galeano... ✅ 7G 3A 37J
+   [10/34] Rodriguinho... ✅ 0G 0A 5J
+   [11/34] Fernando Sobral... ✅ 1G 0A 29J
+   [12/34] Lucas Mugni... ✅ 2G 6A 32J
+   [13/34] Vinicius Zanocelo... ✅ 1G 0A 14J
+   [14/34] Dieguinho... ✅ 0G 2A 31J
+   [15/34] Lourenço... ✅ 2G 1A 32J
+   [16/34] Fernandinho... ✅ 0G 1A 21J
+   [17/34] Richardson... ✅ 0G 0A 16J
+   [18/34] Lucas Lima... ✅ 0G 0A 11J
+   [19/34] Gabriel... ⚪ Sem dados
+   [20/34] Matheus Bahia... ✅ 0G 1A 27J
+   [21/34] Rafael Ramos... ✅ 0G 0A 19J
+   [22/34] Marcos Victor... ✅ 0G 1A 14J
+   [23/34] Willian Machado... ✅ 0G 0A 35J
+   [24/34] Fabiano Souza... ✅ 0G 1A 34J
+   [25/34] Marllon... ✅ 2G 0A 25J
+   [26/34] Luiz Otávio... ⚪ Sem dados
+   [27/34] Nicolas... ✅ 0G 0A 13J
+   [28/34] Éder... ✅ 0G 0A 3J
+   [29/34] Gabriel Lacerda... ⚪ Sem dados
+   [30/34] Keiller... ⚪ Sem dados
+   [31/34] Bruno Ferreira... ✅ 0G 0A 30J
+   [32/34] Richard... ⚪ Sem dados
+   [33/34] Fernando Miguel... ✅ 0G 0A 8J
+   [34/34] Pedro Esli da Silva... ⚪ Sem dados
+
+======================================================================
+🎉 ATUALIZAÇÃO CONCLUÍDA!
+======================================================================
+✅ Jogadores processados: 737
+🆕 Jogadores novos: 570
+♻️  Jogadores atualizados: 167
+📊 Total no sistema: 1157
+======================================================================
