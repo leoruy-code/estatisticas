@@ -108,6 +108,11 @@ class MatchPrediction:
     # Odds justas (sem margem)
     odds_over_25: float = 0.0
     odds_under_25: float = 0.0
+    
+    # 1X2 Probabilidades
+    prob_home_win: float = 0.0
+    prob_draw: float = 0.0
+    prob_away_win: float = 0.0
 
 
 # ==================== FUNÇÕES POISSON ====================
@@ -343,6 +348,43 @@ def prob_to_odds(prob: float) -> float:
     if prob <= 0:
         return float('inf')
     return 1 / prob
+
+
+def calcular_expected_value(prob_modelo: float, odd_mercado: float) -> float:
+    """
+    Calcula Expected Value de uma aposta.
+    
+    EV = (prob_modelo * lucro_se_ganhar) - (1 - prob_modelo) * stake
+    EV = prob_modelo * (odd - 1) - (1 - prob_modelo)
+    
+    EV > 0 significa Value Bet (aposta com valor)
+    EV > 0.05 é considerado value bet forte
+    """
+    if odd_mercado <= 1:
+        return -1.0
+    return prob_modelo * (odd_mercado - 1) - (1 - prob_modelo)
+
+
+def is_value_bet(prob_modelo: float, odd_mercado: float, min_ev: float = 0.0) -> bool:
+    """Retorna True se for value bet (EV positivo acima do threshold)."""
+    return calcular_expected_value(prob_modelo, odd_mercado) > min_ev
+
+
+def calcular_prob_implicita(odd: float) -> float:
+    """Converte odd decimal para probabilidade implícita."""
+    if odd <= 0:
+        return 0.0
+    return 1 / odd
+
+
+def calcular_margem_casa(odds: List[float]) -> float:
+    """
+    Calcula a margem (vig) da casa a partir das odds oferecidas.
+    Margem = (Σ 1/odds) - 1
+    Mercados típicos: 5-10% para Over/Under, 3-7% para 1X2
+    """
+    probs_implicitas = [1/o for o in odds if o > 0]
+    return sum(probs_implicitas) - 1 if probs_implicitas else 0
 
 
 def aplicar_margem(odds_dict: Dict[str, float], margem: float = 0.05) -> Dict[str, float]:
@@ -587,20 +629,31 @@ class PoissonAnalyzer:
             lambda_away_corners=lambda_away_corners,
         )
         
-        # Calcular probabilidades Over/Under gols
+        # Calcular probabilidades Over/Under gols (Poisson - funciona bem para gols)
         pred.prob_over_05_goals = prob_over(lambda_total_goals, 0.5)
         pred.prob_over_15_goals = prob_over(lambda_total_goals, 1.5)
         pred.prob_over_25_goals = prob_over(lambda_total_goals, 2.5)
         pred.prob_over_35_goals = prob_over(lambda_total_goals, 3.5)
         
         # Calcular probabilidades Over/Under escanteios
-        pred.prob_over_85_corners = prob_over(lambda_corners, 8.5)
-        pred.prob_over_95_corners = prob_over(lambda_corners, 9.5)
-        pred.prob_over_105_corners = prob_over(lambda_corners, 10.5)
-        pred.prob_over_115_corners = prob_over(lambda_corners, 11.5)
+        # 🎯 MELHORIA: Usar Negative Binomial para escanteios (geralmente overdispersed)
+        # Escanteios tipicamente têm var > mean, então NegBin é mais preciso
+        # Variance estimada: var ≈ mean * 1.5 (overdispersion típica para corners)
+        var_corners = lambda_corners * 1.5  # Fator de overdispersion empírico
+        
+        pred.prob_over_85_corners = negbin_prob_over(lambda_corners, var_corners, 8.5)
+        pred.prob_over_95_corners = negbin_prob_over(lambda_corners, var_corners, 9.5)
+        pred.prob_over_105_corners = negbin_prob_over(lambda_corners, var_corners, 10.5)
+        pred.prob_over_115_corners = negbin_prob_over(lambda_corners, var_corners, 11.5)
         
         # BTTS
         pred.prob_btts = calcular_prob_btts(lambda_home, lambda_away)
+        
+        # 1X2 (Vitória casa, empate, vitória fora)
+        resultado_1x2 = calcular_1x2(lambda_home, lambda_away)
+        pred.prob_home_win = resultado_1x2['home']
+        pred.prob_draw = resultado_1x2['draw']
+        pred.prob_away_win = resultado_1x2['away']
         
         # Odds justas
         pred.odds_over_25 = prob_to_odds(pred.prob_over_25_goals)

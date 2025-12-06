@@ -527,7 +527,7 @@ elif pagina == "🎯 Análise de Partida (Poisson)":
     # Importar o analisador
     import sys
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-    from poisson_analyzer import PoissonAnalyzer, prob_to_odds, calcular_1x2, calcular_resultado_exato
+    from poisson_analyzer import PoissonAnalyzer, prob_to_odds, calcular_1x2, calcular_resultado_exato, calcular_expected_value, is_value_bet
     
     @st.cache_resource
     def get_analyzer():
@@ -683,6 +683,82 @@ elif pagina == "🎯 Análise de Partida (Poisson)":
             for i, (placar, prob) in enumerate(top_placares):
                 with cols[i % 5]:
                     st.metric(placar, f"{prob*100:.1f}%", f"odd {prob_to_odds(prob):.1f}")
+            
+            # 💰 VALUE BET CALCULATOR
+            st.write("---")
+            st.write("### 💰 Value Bet Calculator")
+            st.write("*Insira as odds do mercado para identificar apostas com valor*")
+            
+            with st.expander("🎰 Calcular Value Bets", expanded=True):
+                col1, col2 = st.columns(2)
+                
+                value_bets_encontradas = []
+                
+                with col1:
+                    st.write("**📊 Mercados de Gols**")
+                    
+                    odd_over25 = st.number_input("Odd Over 2.5 Gols", min_value=1.01, max_value=10.0, value=1.80, step=0.01, key="odd_over25")
+                    ev_over25 = calcular_expected_value(pred.prob_over_25_goals, odd_over25)
+                    if ev_over25 > 0:
+                        st.success(f"✅ VALUE BET! EV: +{ev_over25*100:.1f}%")
+                        value_bets_encontradas.append(("Over 2.5 Gols", odd_over25, pred.prob_over_25_goals, ev_over25))
+                    else:
+                        st.error(f"❌ Sem valor. EV: {ev_over25*100:.1f}%")
+                    
+                    odd_under25 = st.number_input("Odd Under 2.5 Gols", min_value=1.01, max_value=10.0, value=2.10, step=0.01, key="odd_under25")
+                    prob_under25 = 1 - pred.prob_over_25_goals
+                    ev_under25 = calcular_expected_value(prob_under25, odd_under25)
+                    if ev_under25 > 0:
+                        st.success(f"✅ VALUE BET! EV: +{ev_under25*100:.1f}%")
+                        value_bets_encontradas.append(("Under 2.5 Gols", odd_under25, prob_under25, ev_under25))
+                    else:
+                        st.error(f"❌ Sem valor. EV: {ev_under25*100:.1f}%")
+                    
+                    odd_btts = st.number_input("Odd BTTS - Sim", min_value=1.01, max_value=10.0, value=1.70, step=0.01, key="odd_btts")
+                    ev_btts = calcular_expected_value(pred.prob_btts, odd_btts)
+                    if ev_btts > 0:
+                        st.success(f"✅ VALUE BET! EV: +{ev_btts*100:.1f}%")
+                        value_bets_encontradas.append(("BTTS Sim", odd_btts, pred.prob_btts, ev_btts))
+                    else:
+                        st.error(f"❌ Sem valor. EV: {ev_btts*100:.1f}%")
+                
+                with col2:
+                    st.write("**🚩 Mercados de Escanteios**")
+                    
+                    odd_over95_corners = st.number_input("Odd Over 9.5 Escanteios", min_value=1.01, max_value=10.0, value=1.90, step=0.01, key="odd_over95c")
+                    ev_corners = calcular_expected_value(pred.prob_over_95_corners, odd_over95_corners)
+                    if ev_corners > 0:
+                        st.success(f"✅ VALUE BET! EV: +{ev_corners*100:.1f}%")
+                        value_bets_encontradas.append(("Over 9.5 Escanteios", odd_over95_corners, pred.prob_over_95_corners, ev_corners))
+                    else:
+                        st.error(f"❌ Sem valor. EV: {ev_corners*100:.1f}%")
+                    
+                    odd_over105_corners = st.number_input("Odd Over 10.5 Escanteios", min_value=1.01, max_value=10.0, value=2.20, step=0.01, key="odd_over105c")
+                    ev_corners105 = calcular_expected_value(pred.prob_over_105_corners, odd_over105_corners)
+                    if ev_corners105 > 0:
+                        st.success(f"✅ VALUE BET! EV: +{ev_corners105*100:.1f}%")
+                        value_bets_encontradas.append(("Over 10.5 Escanteios", odd_over105_corners, pred.prob_over_105_corners, ev_corners105))
+                    else:
+                        st.error(f"❌ Sem valor. EV: {ev_corners105*100:.1f}%")
+                    
+                    st.write("**🏆 Resultado 1X2**")
+                    probs_1x2 = calcular_1x2(pred.lambda_home_goals, pred.lambda_away_goals)
+                    odd_home = st.number_input(f"Odd Vitória {home_team}", min_value=1.01, max_value=20.0, value=2.00, step=0.01, key="odd_home")
+                    ev_home = calcular_expected_value(probs_1x2['home'], odd_home)
+                    if ev_home > 0:
+                        st.success(f"✅ VALUE BET! EV: +{ev_home*100:.1f}%")
+                        value_bets_encontradas.append((f"Vitória {home_team}", odd_home, probs_1x2['home'], ev_home))
+                    else:
+                        st.error(f"❌ Sem valor. EV: {ev_home*100:.1f}%")
+                
+                # Resumo de Value Bets
+                if value_bets_encontradas:
+                    st.write("---")
+                    st.write("### 🎯 Resumo das Value Bets Encontradas")
+                    for mercado, odd, prob, ev in sorted(value_bets_encontradas, key=lambda x: x[3], reverse=True):
+                        st.write(f"✅ **{mercado}** | Odd: {odd:.2f} | Prob Modelo: {prob*100:.1f}% | **EV: +{ev*100:.1f}%**")
+                else:
+                    st.info("🔍 Nenhuma value bet encontrada com as odds inseridas.")
         else:
             st.error("Times não encontrados!")
 
@@ -844,7 +920,8 @@ elif pagina == "🏆 Ranking de Times":
 st.sidebar.markdown("---")
 st.sidebar.markdown(
     '<div style="text-align:center;color:#666;font-size:0.8rem;">'
-    'RAG Estatísticas v2.1<br/>Brasileirão 2025'
+    'RAG Estatísticas v3.0<br/>Brasileirão 2025<br/>'
+    '<span style="color:#00d4ff;">🎯 Value Bet Engine</span>'
     '</div>',
     unsafe_allow_html=True
 )

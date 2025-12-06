@@ -1,6 +1,10 @@
 """
 Busca dados de escanteios dos times via SofaScore.
 Coleta estatísticas de escanteios por partida e calcula médias.
+
+Filtros aplicados:
+- Apenas jogos do Brasileirão (tournament.uniqueTournament.id == 325)
+- Apenas partidas finalizadas (status.type == 'finished')
 """
 import json
 import time
@@ -8,6 +12,7 @@ import random
 import requests
 from pathlib import Path
 from typing import Dict, List
+from config_times import TIMES_BRASILEIRAO, BRASILEIRAO_TOURNAMENT_ID, BRASILEIRAO_SEASON_2025
 
 BASE_URL = "https://api.sofascore.com/api/v1"
 MIN_DELAY = 1.5
@@ -18,30 +23,6 @@ USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
 ]
-
-# IDs dos times do Brasileirão (CORRIGIDOS)
-TIMES_BRASILEIRAO = {
-    'Flamengo': 5981,
-    'Palmeiras': 1963,
-    'Botafogo': 1958,
-    'São Paulo': 1981,
-    'Corinthians': 1957,  # Corrigido
-    'Atlético-MG': 1977,
-    'Grêmio': 5926,
-    'Fluminense': 1961,   # Corrigido
-    'Cruzeiro': 1954,
-    'Vasco': 1974,        # Corrigido
-    'Internacional': 1966,
-    'Bahia': 1955,        # Corrigido
-    'RB Bragantino': 1999,
-    'Athletico-PR': 1936, # Corrigido
-    'Fortaleza': 1965,    # Corrigido
-    'Juventude': 1980,    # Corrigido
-    'Vitória': 1962,      # Corrigido
-    'Cuiabá': 35023,      # Corrigido
-    'Atlético-GO': 7315,  # Corrigido
-    'Criciúma': 1956      # Corrigido
-}
 
 
 def _headers():
@@ -131,6 +112,11 @@ def buscar_estatisticas_partida(event_id: int, team_id: int, is_home: bool) -> D
 def buscar_ultimas_partidas_com_stats(team_id: int, n_partidas: int = 10) -> List[Dict]:
     """
     Busca últimas partidas de um time com estatísticas detalhadas.
+    
+    Filtros aplicados:
+    - Apenas Brasileirão (tournament.uniqueTournament.id == 325)
+    - Apenas partidas finalizadas (status.type == 'finished')
+    - Limita a n_partidas APÓS aplicar os filtros
     """
     _delay()
     url = f"{BASE_URL}/team/{team_id}/events/last/0"
@@ -141,7 +127,17 @@ def buscar_ultimas_partidas_com_stats(team_id: int, n_partidas: int = 10) -> Lis
             return []
         
         data = r.json()
-        events = data.get('events', [])[:n_partidas]
+        all_events = data.get('events', [])
+        
+        # 🎯 FILTRAR: Apenas Brasileirão e partidas finalizadas
+        events_brasileirao = [
+            ev for ev in all_events
+            if ev.get('tournament', {}).get('uniqueTournament', {}).get('id') == BRASILEIRAO_TOURNAMENT_ID
+            and ev.get('status', {}).get('type') == 'finished'
+        ]
+        
+        # Limitar DEPOIS do filtro
+        events = events_brasileirao[:n_partidas]
         
         partidas = []
         for ev in events:
@@ -153,16 +149,21 @@ def buscar_ultimas_partidas_com_stats(team_id: int, n_partidas: int = 10) -> Lis
             # Buscar estatísticas da partida
             stats = buscar_estatisticas_partida(event_id, team_id, is_home)
             
+            # 🎯 TRATAMENTO: None vs 0 - Ignorar partidas sem dados
+            escanteios = stats.get('escanteios')
+            if escanteios is None:
+                continue
+            
             partidas.append({
                 'event_id': event_id,
                 'adversario': away_team.get('name') if is_home else home_team.get('name'),
                 'casa_fora': 'casa' if is_home else 'fora',
-                'escanteios': stats.get('escanteios', 0),
+                'escanteios': escanteios,  # 0 é valor válido!
                 'chutes': stats.get('chutes', 0),
                 'posse': stats.get('posse', 50),
             })
             
-            print(f"      📊 {partidas[-1]['adversario']}: {stats.get('escanteios', 0)} escanteios")
+            print(f"      📊 {partidas[-1]['adversario']}: {escanteios} escanteios")
         
         return partidas
     

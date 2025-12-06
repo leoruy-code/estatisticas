@@ -10,6 +10,7 @@ import requests
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
+from config_times import TIMES_BRASILEIRAO, BRASILEIRAO_TOURNAMENT_ID
 
 BASE_URL = "https://api.sofascore.com/api/v1"
 MIN_DELAY = 1.5
@@ -20,30 +21,6 @@ USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
 ]
-
-# IDs dos times do Brasileirão (atualizados)
-TIMES_BRASILEIRAO = {
-    'Flamengo': 5981,
-    'Palmeiras': 1963,
-    'Botafogo': 1958,
-    'São Paulo': 1981,
-    'Corinthians': 5926,
-    'Atlético-MG': 1947,
-    'Grêmio': 5926,
-    'Fluminense': 5930,
-    'Cruzeiro': 1963,
-    'Vasco': 5998,
-    'Internacional': 1966,
-    'Bahia': 1943,
-    'RB Bragantino': 1999,
-    'Athletico-PR': 1950,
-    'Fortaleza': 1973,
-    'Juventude': 1968,
-    'Vitória': 1997,
-    'Cuiabá': 24264,
-    'Atlético-GO': 1957,
-    'Criciúma': 1964
-}
 
 
 def _headers():
@@ -61,8 +38,13 @@ def _delay():
 
 def buscar_ultimas_partidas(team_id: int, n_partidas: int = 20) -> List[Dict]:
     """
-    Busca as últimas N partidas de um time.
+    Busca as últimas N partidas de um time do Brasileirão.
     Retorna lista com: adversário, gols_pro, gols_contra, casa/fora, resultado.
+    
+    Filtros aplicados:
+    - Apenas tournament.uniqueTournament.id == BRASILEIRAO_TOURNAMENT_ID (325)
+    - Apenas status.type == "finished"
+    - Limita a n_partidas APÓS aplicar os filtros
     """
     _delay()
     url = f"{BASE_URL}/team/{team_id}/events/last/0"
@@ -74,14 +56,29 @@ def buscar_ultimas_partidas(team_id: int, n_partidas: int = 20) -> List[Dict]:
             return []
         
         data = r.json()
-        events = data.get('events', [])[:n_partidas]
+        all_events = data.get('events', [])
+        
+        # 🎯 FILTRAR: Apenas Brasileirão e partidas finalizadas
+        events_brasileirao = [
+            ev for ev in all_events
+            if ev.get('tournament', {}).get('uniqueTournament', {}).get('id') == BRASILEIRAO_TOURNAMENT_ID
+            and ev.get('status', {}).get('type') == 'finished'
+        ]
+        
+        # Limitar DEPOIS do filtro
+        events = events_brasileirao[:n_partidas]
         
         partidas = []
         for ev in events:
             home_team = ev.get('homeTeam', {})
             away_team = ev.get('awayTeam', {})
-            home_score = ev.get('homeScore', {}).get('current', 0)
-            away_score = ev.get('awayScore', {}).get('current', 0)
+            home_score = ev.get('homeScore', {}).get('current')
+            away_score = ev.get('awayScore', {}).get('current')
+            
+            # 🎯 TRATAMENTO: None vs 0
+            # Se score é None, ignorar partida (dados incompletos)
+            if home_score is None or away_score is None:
+                continue
             
             is_home = home_team.get('id') == team_id
             
