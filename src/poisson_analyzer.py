@@ -409,12 +409,28 @@ def aplicar_margem(odds_dict: Dict[str, float], margem: float = 0.05) -> Dict[st
 class PoissonAnalyzer:
     """Analisador principal usando distribuição Poisson."""
     
-    def __init__(self, jogadores_path: str = 'data/jogadores.json', times_path: str = 'data/times.json'):
+    def __init__(
+        self, 
+        jogadores_path: str = 'data/jogadores.json', 
+        times_path: str = 'data/times.json',
+        use_calibration: bool = True
+    ):
         self.jogadores = self._load_json(jogadores_path)
         self.times_data = self._load_json(times_path)
         self.times_stats: Dict[str, TeamStats] = {}
         self.times_metricas: Dict[str, Dict] = {}  # Dados de partidas reais
         self.league_averages: Dict[str, float] = {}
+        self.use_calibration = use_calibration
+        self.calibrator = None
+        
+        # Tentar carregar calibrador
+        if use_calibration:
+            try:
+                from backtest.calibration import Calibrator
+                calibrators_path = Path(jogadores_path).parent / 'calibrators.json'
+                self.calibrator = Calibrator(str(calibrators_path))
+            except:
+                self.calibrator = None
         
         self._carregar_metricas_times()
         self._calcular_stats_times()
@@ -658,6 +674,19 @@ class PoissonAnalyzer:
         # Odds justas
         pred.odds_over_25 = prob_to_odds(pred.prob_over_25_goals)
         pred.odds_under_25 = prob_to_odds(1 - pred.prob_over_25_goals)
+        
+        # 🎯 CALIBRAÇÃO: Aplicar calibradores treinados (se disponíveis)
+        if self.use_calibration and self.calibrator:
+            pred.prob_over_25_goals = self.calibrator.calibrate('over_25_goals', pred.prob_over_25_goals)
+            pred.prob_over_35_goals = self.calibrator.calibrate('over_35_goals', pred.prob_over_35_goals)
+            pred.prob_btts = self.calibrator.calibrate('btts', pred.prob_btts)
+            pred.prob_over_95_corners = self.calibrator.calibrate('over_95_corners', pred.prob_over_95_corners)
+            pred.prob_over_105_corners = self.calibrator.calibrate('over_105_corners', pred.prob_over_105_corners)
+            pred.prob_home_win = self.calibrator.calibrate('home_win', pred.prob_home_win)
+            
+            # Recalcular odds com probabilidades calibradas
+            pred.odds_over_25 = prob_to_odds(pred.prob_over_25_goals)
+            pred.odds_under_25 = prob_to_odds(1 - pred.prob_over_25_goals)
         
         return pred
     
