@@ -43,11 +43,11 @@ else:
 - [x] Implementar `negbin_prob_over(mean, var, threshold)`
 - [x] Aplicar em escanteios (overdispersion típica)
 
-### Fase 2B - Calibração de Probabilidades [PENDENTE]
-- [ ] Implementar Platt Scaling
-- [ ] Implementar Isotonic Regression
-- [ ] Criar curvas de calibração
-- [ ] Aplicar ao frontend
+### Fase 2B - Calibração de Probabilidades [✅ CONCLUÍDO]
+- [x] Implementar Platt Scaling
+- [x] Implementar Isotonic Regression
+- [x] Criar curvas de calibração
+- [x] Aplicar ao PoissonAnalyzer automaticamente
 
 ## 💰 Fase 3 - Engine de Value Bets [✅ CONCLUÍDO]
 ```python
@@ -59,11 +59,12 @@ EV = prob_model * (odd_market - 1) - (1 - prob_model)
 - [x] Destacar value bets com EV positivo
 - [x] Resumo de value bets encontradas
 
-### Fase 4 - Backtest & Validação
-- [ ] Script `src/backtest/backtest_poisson.py`
-- [ ] Brier Score por mercado
-- [ ] Calibration curves
-- [ ] Grid search de hiperparâmetros
+### Fase 4 - Backtest & Validação [✅ CONCLUÍDO]
+- [x] Script `src/backtest/backtest_engine.py`
+- [x] 233 partidas históricas coletadas
+- [x] Brier Score por mercado
+- [x] Calibração automática integrada
+- [x] Melhorias de 7-22% no Brier Score
 
 ## 🎯 Ordem de Implementação
 
