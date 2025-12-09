@@ -316,18 +316,38 @@ def get_teams():
         st.error(f"Erro ao buscar times: {str(e)}")
         return []
 
+
+@st.cache_data(ttl=300)
+def get_players(team_id: int):
+    """Busca jogadores de um time."""
+    try:
+        response = requests.get(f"{API_BASE_URL}/players/{team_id}", timeout=10)
+        if response.status_code == 200:
+            data = response.json()
+            return data.get('jogadores', [])
+        return []
+    except Exception as e:
+        st.error(f"Erro ao buscar jogadores: {str(e)}")
+        return []
+
 def predict_match(home_id: int, away_id: int, n_simulations: int = 50_000, lineup_confidence: float = 1.0):
     """Faz predição de partida (sem cache para garantir valores únicos)."""
     try:
+        payload = {
+            "mandante_id": home_id,
+            "visitante_id": away_id,
+            "n_simulations": n_simulations,
+            "lineup_confidence_mandante": lineup_confidence,
+            "lineup_confidence_visitante": lineup_confidence
+        }
+        if st.session_state.get('lineup_home_ids'):
+            payload["lineup_mandante"] = st.session_state['lineup_home_ids']
+        if st.session_state.get('lineup_away_ids'):
+            payload["lineup_visitante"] = st.session_state['lineup_away_ids']
+
         response = requests.post(
             f"{API_BASE_URL}/predict",
-            json={
-                "mandante_id": home_id, 
-                "visitante_id": away_id,
-                "n_simulations": n_simulations,
-                "lineup_confidence_mandante": lineup_confidence,
-                "lineup_confidence_visitante": lineup_confidence
-            },
+            json=payload,
             timeout=60
         )
         if response.status_code == 200:
@@ -459,6 +479,43 @@ def show_prediction_tab(show_stats, show_confidence, n_simulations):
         st.markdown('</div>', unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
+
+    # Escalações prováveis
+    home_players = get_players(team_dict[home_team]) if home_team else []
+    away_players = get_players(team_dict[away_team]) if away_team else []
+    home_options = [f"{p['nome']} ({p['posicao']})" for p in sorted(home_players, key=lambda x: x.get('rating_geral', 0), reverse=True)]
+    away_options = [f"{p['nome']} ({p['posicao']})" for p in sorted(away_players, key=lambda x: x.get('rating_geral', 0), reverse=True)]
+    home_map = {f"{p['nome']} ({p['posicao']})": p['id'] for p in home_players}
+    away_map = {f"{p['nome']} ({p['posicao']})": p['id'] for p in away_players}
+
+    st.markdown("### 📋 Escalações (opcional)")
+    colh, cola = st.columns(2)
+    with colh:
+        default_home = home_options[:11]
+        selected_home = st.multiselect(
+            "Mandante - escolha até 11",
+            options=home_options,
+            default=default_home,
+            max_selections=11,
+            key="lineup_home_select"
+        )
+        st.caption(f"Selecionados: {len(selected_home)}/11")
+    with cola:
+        default_away = away_options[:11]
+        selected_away = st.multiselect(
+            "Visitante - escolha até 11",
+            options=away_options,
+            default=default_away,
+            max_selections=11,
+            key="lineup_away_select"
+        )
+        st.caption(f"Selecionados: {len(selected_away)}/11")
+
+    # Persistir seleção para o payload e exibição
+    st.session_state['lineup_home_ids'] = [home_map[o] for o in selected_home if o in home_map]
+    st.session_state['lineup_away_ids'] = [away_map[o] for o in selected_away if o in away_map]
+    st.session_state['lineup_home_names'] = [o for o in selected_home]
+    st.session_state['lineup_away_names'] = [o for o in selected_away]
     
     # Botão de predição
     col1, col2, col3 = st.columns([1, 2, 1])
@@ -489,6 +546,8 @@ def display_prediction(prediction, home_team, away_team, show_stats, show_confid
     base_params = parametros.get('base_params', {})
     lineup_meta = parametros.get('lineup_adjustments', {})
     warnings = prediction.get('warnings', []) or []
+    lineup_home_names = st.session_state.get('lineup_home_names', [])
+    lineup_away_names = st.session_state.get('lineup_away_names', [])
     
     # Card principal de resultado
     st.markdown('<div class="prediction-card">', unsafe_allow_html=True)
@@ -602,6 +661,12 @@ def display_prediction(prediction, home_team, away_team, show_stats, show_confid
     if warnings or base_params:
         st.markdown("<br>", unsafe_allow_html=True)
         with st.expander("🔎 Diagnóstico do modelo", expanded=False):
+            if lineup_home_names or lineup_away_names:
+                st.markdown("**Escalações usadas:**")
+                if lineup_home_names:
+                    st.markdown("- Mandante: " + ", ".join(lineup_home_names))
+                if lineup_away_names:
+                    st.markdown("- Visitante: " + ", ".join(lineup_away_names))
             if warnings:
                 st.markdown("**Avisos de dados:**")
                 for w in warnings:
