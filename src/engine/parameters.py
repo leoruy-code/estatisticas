@@ -13,7 +13,7 @@ Ou forma multiplicativa:
 λ₁ = λ_base × f(A₁) × g(D₂) × h(mando)
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 import numpy as np
 
@@ -41,6 +41,8 @@ class MatchParameters:
     
     # Metadados
     confianca: float  # 0-1, quão confiável é a previsão
+    base_params: dict = field(default_factory=dict)
+    lineup_adjustments: dict = field(default_factory=dict)
     
     def to_dict(self) -> dict:
         return {
@@ -59,7 +61,9 @@ class MatchParameters:
                 'visitante': round(self.kappa_visitante, 2),
                 'total': round(self.kappa_total, 2)
             },
-            'confianca': round(self.confianca, 2)
+            'confianca': round(self.confianca, 2),
+            'base_params': self.base_params,
+            'lineup_adjustments': self.lineup_adjustments
         }
 
 
@@ -113,17 +117,17 @@ class ParameterCalculator:
         visitante = self.team_model.calculate_team_strength(visitante_id, league_id, temporada)
         
         # Calcular λ (gols)
-        lambda_m, lambda_v = self._calculate_goals_lambda(
+        lambda_m, lambda_v, lambda_meta = self._calculate_goals_lambda(
             league_avg, mandante, visitante
         )
         
         # Calcular μ (cartões)
-        mu_m, mu_v = self._calculate_cards_mu(
+        mu_m, mu_v, mu_meta = self._calculate_cards_mu(
             league_avg, mandante, visitante
         )
         
         # Calcular κ (escanteios)
-        kappa_m, kappa_v = self._calculate_corners_kappa(
+        kappa_m, kappa_v, kappa_meta = self._calculate_corners_kappa(
             league_avg, mandante, visitante
         )
         
@@ -140,7 +144,32 @@ class ParameterCalculator:
             kappa_mandante=kappa_m,
             kappa_visitante=kappa_v,
             kappa_total=kappa_m + kappa_v,
-            confianca=confianca
+            confianca=confianca,
+            base_params={
+                'mandante': {
+                    'gols': round(lambda_m, 4),
+                    'cartoes': round(mu_m, 4),
+                    'escanteios': round(kappa_m, 4)
+                },
+                'visitante': {
+                    'gols': round(lambda_v, 4),
+                    'cartoes': round(mu_v, 4),
+                    'escanteios': round(kappa_v, 4)
+                },
+                'fatores': {
+                    'gols': lambda_meta,
+                    'cartoes': mu_meta,
+                    'escanteios': kappa_meta,
+                    'anchors': {
+                        'gols_mandante': league_avg.gols_mandante,
+                        'gols_visitante': league_avg.gols_visitante,
+                        'cartoes_mandante': league_avg.cartoes_mandante,
+                        'cartoes_visitante': league_avg.cartoes_visitante,
+                        'escanteios_mandante': league_avg.escanteios_mandante,
+                        'escanteios_visitante': league_avg.escanteios_visitante
+                    }
+                }
+            }
         )
     
     def _calculate_goals_lambda(
@@ -172,10 +201,25 @@ class ParameterCalculator:
         )
         
         # Limitar valores extremos
+        raw_meta = {
+            'mandante': {
+                'anchor': league.gols_mandante,
+                'ataque': mandante.ataque_casa,
+                'defesa_adversario': visitante.defesa_fora,
+                'fator_mando': self.FATOR_MANDANTE_GOLS
+            },
+            'visitante': {
+                'anchor': league.gols_visitante,
+                'ataque': visitante.ataque_fora,
+                'defesa_adversario': mandante.defesa_casa,
+                'fator_mando': self.FATOR_VISITANTE_GOLS
+            }
+        }
+        
         lambda_m = max(0.3, min(lambda_m, 5.0))
         lambda_v = max(0.2, min(lambda_v, 4.0))
         
-        return lambda_m, lambda_v
+        return lambda_m, lambda_v, raw_meta
     
     def _calculate_cards_mu(
         self,
@@ -187,20 +231,37 @@ class ParameterCalculator:
         mu_m = (
             league.cartoes_mandante *
             mandante.cartoes_favor *
+            visitante.cartoes_contra *
             self.FATOR_MANDANTE_CARTOES
         )
         
         mu_v = (
             league.cartoes_visitante *
             visitante.cartoes_favor *
+            mandante.cartoes_contra *
             self.FATOR_VISITANTE_CARTOES
         )
         
         # Limitar
+        raw_meta = {
+            'mandante': {
+                'anchor': league.cartoes_mandante,
+                'disciplina_propria': mandante.cartoes_favor,
+                'disciplina_adv': visitante.cartoes_contra,
+                'fator_mando': self.FATOR_MANDANTE_CARTOES
+            },
+            'visitante': {
+                'anchor': league.cartoes_visitante,
+                'disciplina_propria': visitante.cartoes_favor,
+                'disciplina_adv': mandante.cartoes_contra,
+                'fator_mando': self.FATOR_VISITANTE_CARTOES
+            }
+        }
+        
         mu_m = max(1.0, min(mu_m, 6.0))
         mu_v = max(1.0, min(mu_v, 6.0))
         
-        return mu_m, mu_v
+        return mu_m, mu_v, raw_meta
     
     def _calculate_corners_kappa(
         self,
@@ -212,20 +273,37 @@ class ParameterCalculator:
         kappa_m = (
             league.escanteios_mandante *
             mandante.escanteios_favor *
+            visitante.escanteios_contra *
             self.FATOR_MANDANTE_ESCANTEIOS
         )
         
         kappa_v = (
             league.escanteios_visitante *
             visitante.escanteios_favor *
+            mandante.escanteios_contra *
             self.FATOR_VISITANTE_ESCANTEIOS
         )
         
         # Limitar
+        raw_meta = {
+            'mandante': {
+                'anchor': league.escanteios_mandante,
+                'forca_propria': mandante.escanteios_favor,
+                'concede_adv': visitante.escanteios_contra,
+                'fator_mando': self.FATOR_MANDANTE_ESCANTEIOS
+            },
+            'visitante': {
+                'anchor': league.escanteios_visitante,
+                'forca_propria': visitante.escanteios_favor,
+                'concede_adv': mandante.escanteios_contra,
+                'fator_mando': self.FATOR_VISITANTE_ESCANTEIOS
+            }
+        }
+        
         kappa_m = max(2.0, min(kappa_m, 12.0))
         kappa_v = max(2.0, min(kappa_v, 10.0))
         
-        return kappa_m, kappa_v
+        return kappa_m, kappa_v, raw_meta
     
     def calculate_with_log(
         self,

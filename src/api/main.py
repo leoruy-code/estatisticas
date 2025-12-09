@@ -83,6 +83,8 @@ class PredictionRequest(BaseModel):
     lineup_visitante: Optional[List[int]] = None
     tipo_competicao: Optional[str] = "pontos_corridos"
     n_simulations: Optional[int] = 50_000  # Número de simulações Monte Carlo
+    lineup_confidence_mandante: Optional[float] = 1.0
+    lineup_confidence_visitante: Optional[float] = 1.0
 
 
 class TeamResponse(BaseModel):
@@ -203,7 +205,9 @@ async def predict_match(request: PredictionRequest):
             league_id=request.league_id,
             context=context,
             lineup_mandante=request.lineup_mandante,
-            lineup_visitante=request.lineup_visitante
+            lineup_visitante=request.lineup_visitante,
+            lineup_confidence_mandante=request.lineup_confidence_mandante or 1.0,
+            lineup_confidence_visitante=request.lineup_confidence_visitante or 1.0
         )
         
         return prediction.to_dict()

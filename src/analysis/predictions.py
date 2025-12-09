@@ -9,7 +9,7 @@ Orquestra todo o pipeline:
 5. Retorna previsões completas
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional, List, Dict
 import json
 
@@ -43,6 +43,7 @@ class MatchPrediction:
     
     # Se usou escalação
     com_escalacao: bool = False
+    warnings: List[str] = field(default_factory=list)
     
     def to_dict(self) -> dict:
         """Converte para dicionário completo."""
@@ -56,7 +57,8 @@ class MatchPrediction:
             'parametros': self.parameters.to_dict(),
             'previsao': self.simulation.to_dict(),
             'confianca': round(self.confianca * 100, 1),
-            'com_escalacao': self.com_escalacao
+            'com_escalacao': self.com_escalacao,
+            'warnings': self.warnings or []
         }
     
     def resumo(self) -> dict:
@@ -75,7 +77,8 @@ class MatchPrediction:
                 'over_2.5': f"{sim.prob_over_25 * 100:.1f}%"
             },
             'placar_provavel': sim.placares_provaveis[0] if sim.placares_provaveis else None,
-            'confianca': f"{self.confianca * 100:.0f}%"
+            'confianca': f"{self.confianca * 100:.0f}%",
+            'warnings': self.warnings or []
         }
     
     def _get_favorito(self) -> str:
@@ -120,7 +123,9 @@ class MatchPredictor:
         temporada: str = "2025",
         context: Optional[MatchContext] = None,
         lineup_mandante: Optional[List[int]] = None,
-        lineup_visitante: Optional[List[int]] = None
+        lineup_visitante: Optional[List[int]] = None,
+        lineup_confidence_mandante: float = 1.0,
+        lineup_confidence_visitante: float = 1.0
     ) -> MatchPrediction:
         """
         Gera previsão completa para uma partida.
@@ -137,10 +142,22 @@ class MatchPredictor:
         Returns:
             MatchPrediction com previsão completa
         """
+        # 0. Âncoras da liga (usadas em overdispersão e warnings)
+        league_avg = self.league_stats.calculate_averages(league_id, temporada)
+
         # 1. Calcular parâmetros base
         params = self.param_calculator.calculate(
             mandante_id, visitante_id, league_id, temporada
         )
+        
+        # 1.1 Overdispersão específica por mercado (gols/cartões/escanteios)
+        overdisp = self.league_stats.get_overdispersion_by_market(league_id, temporada)
+        distribution_prefs = {
+            'gols': overdisp['gols']['recomendacao'],
+            'cartoes': overdisp['cartoes']['recomendacao'],
+            'escanteios': overdisp['escanteios']['recomendacao']
+        }
+        params.base_params['distribution_prefs'] = distribution_prefs
         
         # Converter para dict para ajustes
         params_dict = {
@@ -149,7 +166,8 @@ class MatchPredictor:
             'mu_mandante': params.mu_mandante,
             'mu_visitante': params.mu_visitante,
             'kappa_mandante': params.kappa_mandante,
-            'kappa_visitante': params.kappa_visitante
+            'kappa_visitante': params.kappa_visitante,
+            'distribution_prefs': distribution_prefs
         }
         
         # 2. Ajustar por contexto
@@ -160,9 +178,15 @@ class MatchPredictor:
         com_escalacao = False
         if lineup_mandante and lineup_visitante:
             params_dict = self.lineup_adjuster.adjust_for_lineup(
-                params_dict, lineup_mandante, lineup_visitante
+                params_dict,
+                lineup_mandante,
+                lineup_visitante,
+                confidence_mandante=lineup_confidence_mandante,
+                confidence_visitante=lineup_confidence_visitante
             )
             com_escalacao = True
+            params.lineup_adjustments = params_dict.get('lineup_ratios', {})
+            params.lineup_adjustments['lineup_confidence'] = params_dict.get('lineup_confidence', {})
         
         # 4. Rodar Monte Carlo
         simulation = self.simulator.simulate_from_params(params_dict)
@@ -170,6 +194,8 @@ class MatchPredictor:
         # 5. Buscar nomes dos times
         mandante = self.team_model.calculate_team_strength(mandante_id, league_id)
         visitante = self.team_model.calculate_team_strength(visitante_id, league_id)
+
+        warnings = self._build_warnings(league_id, mandante, visitante, league_avg)
         
         return MatchPrediction(
             mandante=mandante.team_name,
@@ -179,7 +205,8 @@ class MatchPredictor:
             parameters=params,
             simulation=simulation,
             confianca=params.confianca,
-            com_escalacao=com_escalacao
+            com_escalacao=com_escalacao,
+            warnings=warnings
         )
     
     def predict_quick(
@@ -205,6 +232,19 @@ class MatchPredictor:
             'partida': f"{mandante.team_name} x {visitante.team_name}",
             **result
         }
+
+    def _build_warnings(self, league_id: int, mandante, visitante, league_avg) -> List[str]:
+        """Gera avisos de qualidade dos dados para transparência."""
+        warnings = []
+        if league_avg.total_jogos < 50:
+            warnings.append("Poucos jogos na liga: âncora pode estar instável.")
+        for side, team in [('Mandante', mandante), ('Visitante', visitante)]:
+            jogos = team.jogos_casa + team.jogos_fora
+            if jogos < 8:
+                warnings.append(f"{side}: apenas {jogos} jogos; regressão à média alta.")
+            if team.confianca < 0.6:
+                warnings.append(f"{side}: confiança baixa ({team.confianca:.2f}).")
+        return warnings
     
     def predict_round(
         self,

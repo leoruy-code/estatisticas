@@ -128,7 +128,8 @@ class MonteCarloSimulator:
         mu_visitante: float = 2.5,
         kappa_mandante: float = 5.0,
         kappa_visitante: float = 4.0,
-        use_negbinomial_cards: bool = True
+        use_negbinomial_cards: bool = True,
+        distribution_prefs: Optional[Dict[str, str]] = None
     ) -> SimulationResult:
         """
         Executa simulação Monte Carlo.
@@ -148,18 +149,32 @@ class MonteCarloSimulator:
         n = self.n_simulations
         
         # Criar distribuições
-        dist_gols_m = PoissonModel(lambda_mandante)
-        dist_gols_v = PoissonModel(lambda_visitante)
+        prefs = distribution_prefs or {}
         
-        if use_negbinomial_cards:
-            dist_cart_m = NegBinomialModel(mu_mandante, alpha=0.5)
-            dist_cart_v = NegBinomialModel(mu_visitante, alpha=0.5)
+        # Gols
+        if prefs.get('gols') == 'negbinomial':
+            dist_gols_m = NegBinomialModel(lambda_mandante, alpha=0.35)
+            dist_gols_v = NegBinomialModel(lambda_visitante, alpha=0.35)
         else:
+            dist_gols_m = PoissonModel(lambda_mandante)
+            dist_gols_v = PoissonModel(lambda_visitante)
+        
+        # Cartões
+        if prefs.get('cartoes') == 'poisson':
             dist_cart_m = PoissonModel(mu_mandante)
             dist_cart_v = PoissonModel(mu_visitante)
+        else:
+            # NegBinomial por padrão para capturar overdispersão
+            dist_cart_m = NegBinomialModel(mu_mandante, alpha=0.5)
+            dist_cart_v = NegBinomialModel(mu_visitante, alpha=0.5)
         
-        dist_esc_m = PoissonModel(kappa_mandante)
-        dist_esc_v = PoissonModel(kappa_visitante)
+        # Escanteios
+        if prefs.get('escanteios') == 'negbinomial':
+            dist_esc_m = NegBinomialModel(kappa_mandante, alpha=0.25)
+            dist_esc_v = NegBinomialModel(kappa_visitante, alpha=0.25)
+        else:
+            dist_esc_m = PoissonModel(kappa_mandante)
+            dist_esc_v = PoissonModel(kappa_visitante)
         
         # Simular
         gols_m = dist_gols_m.sample(n)
@@ -253,7 +268,8 @@ class MonteCarloSimulator:
             mu_mandante=params.get('mu_mandante', 2.0),
             mu_visitante=params.get('mu_visitante', 2.5),
             kappa_mandante=params.get('kappa_mandante', 5.0),
-            kappa_visitante=params.get('kappa_visitante', 4.0)
+            kappa_visitante=params.get('kappa_visitante', 4.0),
+            distribution_prefs=params.get('distribution_prefs')
         )
     
     def quick_simulate(

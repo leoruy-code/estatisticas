@@ -40,7 +40,9 @@ class LineupAdjuster:
         self,
         params: dict,
         lineup_mandante: List[int],
-        lineup_visitante: List[int]
+        lineup_visitante: List[int],
+        confidence_mandante: float = 1.0,
+        confidence_visitante: float = 1.0
     ) -> dict:
         """
         Ajusta parâmetros baseado nas escalações.
@@ -53,49 +55,33 @@ class LineupAdjuster:
         Returns:
             Dict com parâmetros ajustados
         """
-        # Calcular força das escalações
-        strength_m = self.player_model.calculate_lineup_strength(lineup_mandante)
-        strength_v = self.player_model.calculate_lineup_strength(lineup_visitante)
+        # Multiplicadores a partir das escalações
+        ratios_m = self.player_model.calculate_lineup_ratios(lineup_mandante)
+        ratios_v = self.player_model.calculate_lineup_ratios(lineup_visitante)
         
-        # Desvio do rating médio
-        delta_ataque_m = strength_m['ataque'] - self.RATING_MEDIO_ATAQUE
-        delta_ataque_v = strength_v['ataque'] - self.RATING_MEDIO_ATAQUE
-        delta_defesa_m = strength_m['defesa'] - self.RATING_MEDIO_DEFESA
-        delta_defesa_v = strength_v['defesa'] - self.RATING_MEDIO_DEFESA
-        delta_disc_m = self.RATING_MEDIO_DISCIPLINA - strength_m['disciplina']  # Invertido
-        delta_disc_v = self.RATING_MEDIO_DISCIPLINA - strength_v['disciplina']
-        
-        # Ajustar gols
-        # λ_mandante aumenta se: ataque mandante bom OU defesa visitante ruim
-        fator_lambda_m = (
-            1.0 + 
-            self.ALPHA_ATAQUE * delta_ataque_m +
-            self.ALPHA_DEFESA * (-delta_defesa_v)  # Defesa ruim do visitante = mais gols
-        )
-        
-        fator_lambda_v = (
-            1.0 +
-            self.ALPHA_ATAQUE * delta_ataque_v +
-            self.ALPHA_DEFESA * (-delta_defesa_m)
-        )
-        
-        # Ajustar cartões (disciplina ruim = mais cartões)
-        fator_mu_m = 1.0 + self.ALPHA_DISCIPLINA * delta_disc_m
-        fator_mu_v = 1.0 + self.ALPHA_DISCIPLINA * delta_disc_v
-        
-        # Aplicar ajustes
+        def _blend(base_ratio: float, confidence: float) -> float:
+            """Blenda ratio com neutro=1.0 de acordo com confiança (0=ignora lineup)."""
+            conf = max(0.0, min(1.0, confidence))
+            return 1.0 + (base_ratio - 1.0) * conf
+
         adjusted = {
-            'lambda_mandante': params['lambda_mandante'] * max(0.7, min(fator_lambda_m, 1.4)),
-            'lambda_visitante': params['lambda_visitante'] * max(0.7, min(fator_lambda_v, 1.4)),
-            'mu_mandante': params['mu_mandante'] * max(0.7, min(fator_mu_m, 1.5)),
-            'mu_visitante': params['mu_visitante'] * max(0.7, min(fator_mu_v, 1.5)),
-            'kappa_mandante': params.get('kappa_mandante', 5.0),
-            'kappa_visitante': params.get('kappa_visitante', 4.0),
+            'lambda_mandante': params['lambda_mandante'] * _blend(ratios_m['off_ratio'], confidence_mandante) * max(0.8, min(1.2, 1.0 / _blend(ratios_v.get('off_ratio', 1.0), confidence_visitante))),
+            'lambda_visitante': params['lambda_visitante'] * _blend(ratios_v['off_ratio'], confidence_visitante) * max(0.8, min(1.2, 1.0 / _blend(ratios_m.get('off_ratio', 1.0), confidence_mandante))),
+            'mu_mandante': params['mu_mandante'] * _blend(ratios_m['foul_ratio'], confidence_mandante),
+            'mu_visitante': params['mu_visitante'] * _blend(ratios_v['foul_ratio'], confidence_visitante),
+            'kappa_mandante': params.get('kappa_mandante', 5.0) * _blend(ratios_m['cross_ratio'], confidence_mandante),
+            'kappa_visitante': params.get('kappa_visitante', 4.0) * _blend(ratios_v['cross_ratio'], confidence_visitante),
             
             # Metadados
             'ajuste_aplicado': True,
-            'strength_mandante': strength_m,
-            'strength_visitante': strength_v
+            'lineup_ratios': {
+                'mandante': ratios_m,
+                'visitante': ratios_v
+            },
+            'lineup_confidence': {
+                'mandante': max(0.0, min(1.0, confidence_mandante)),
+                'visitante': max(0.0, min(1.0, confidence_visitante))
+            }
         }
         
         return adjusted

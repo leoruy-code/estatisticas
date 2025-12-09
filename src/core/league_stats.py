@@ -12,7 +12,7 @@ Essas médias servem como referência para times com poucos jogos.
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Dict
 import numpy as np
 
 
@@ -191,4 +191,81 @@ class LeagueStats:
                 'usar_negbinomial': False
             },
             'recomendacao': 'poisson'
+        }
+
+    def get_overdispersion_by_market(self, league_id: int, temporada: str = "2025", window: int = 200) -> Dict[str, Dict]:
+        """
+        Calcula média/variância por mercado (gols, cartões, escanteios) e recomenda distribuição.
+        Usa janela recente para refletir forma atual e respeitar overdispersão específica de cada variável.
+        """
+        conn = self.get_connection()
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+        cursor.execute(
+            """
+            SELECT 
+                m.home_goals as gols_mandante,
+                m.away_goals as gols_visitante,
+                (m.home_yellow_cards + m.home_red_cards) as cartoes_mandante,
+                (m.away_yellow_cards + m.away_red_cards) as cartoes_visitante,
+                m.home_corners as escanteios_mandante,
+                m.away_corners as escanteios_visitante
+            FROM matches m
+            JOIN teams t ON m.home_team_id = t.id
+            WHERE t.league_id = %s
+            AND m.status = 'finished'
+            ORDER BY m.data DESC
+            LIMIT %s
+            """,
+            (league_id, window)
+        )
+
+        partidas = cursor.fetchall()
+        conn.close()
+
+        if not partidas:
+            default = self._get_default_variance()
+            return {
+                'gols': {**default['gols'], 'recomendacao': default['recomendacao']},
+                'cartoes': {'mandante': {'media': 2.1, 'variancia': 2.5}, 'visitante': {'media': 2.4, 'variancia': 2.9}, 'recomendacao': 'negbinomial'},
+                'escanteios': {'mandante': {'media': 5.2, 'variancia': 6.0}, 'visitante': {'media': 4.3, 'variancia': 5.0}, 'recomendacao': 'poisson'}
+            }
+
+        def _mean_var(values):
+            arr = np.array(values, dtype=float)
+            return float(np.mean(arr)), float(np.var(arr))
+
+        gols_m = [p['gols_mandante'] or 0 for p in partidas]
+        gols_v = [p['gols_visitante'] or 0 for p in partidas]
+        cart_m = [p['cartoes_mandante'] or 0 for p in partidas]
+        cart_v = [p['cartoes_visitante'] or 0 for p in partidas]
+        esc_m = [p['escanteios_mandante'] or 0 for p in partidas]
+        esc_v = [p['escanteios_visitante'] or 0 for p in partidas]
+
+        m_gm, v_gm = _mean_var(gols_m)
+        m_gv, v_gv = _mean_var(gols_v)
+        m_cm, v_cm = _mean_var(cart_m)
+        m_cv, v_cv = _mean_var(cart_v)
+        m_em, v_em = _mean_var(esc_m)
+        m_ev, v_ev = _mean_var(esc_v)
+
+        def _rec(mean, var, thresh=1.4):
+            return 'negbinomial' if mean > 0 and var > mean * thresh else 'poisson'
+
+        return {
+            'gols': {
+                'mandante': {'media': m_gm, 'variancia': v_gm},
+                'visitante': {'media': m_gv, 'variancia': v_gv},
+                'recomendacao': _rec((m_gm + m_gv) / 2, (v_gm + v_gv) / 2)
+            },
+            'cartoes': {
+                'mandante': {'media': m_cm, 'variancia': v_cm},
+                'visitante': {'media': m_cv, 'variancia': v_cv},
+                'recomendacao': _rec((m_cm + m_cv) / 2, (v_cm + v_cv) / 2, thresh=1.2)
+            },
+            'escanteios': {
+                'mandante': {'media': m_em, 'variancia': v_em},
+                'visitante': {'media': m_ev, 'variancia': v_ev},
+                'recomendacao': _rec((m_em + m_ev) / 2, (v_em + v_ev) / 2, thresh=1.3)
+            }
         }

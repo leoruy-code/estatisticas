@@ -128,7 +128,9 @@ class TeamModel:
         jogos_fora = fora['jogos'] if fora and fora['jogos'] else 0
         total_jogos = jogos_casa + jogos_fora
         
-        # Peso de confiança (regressão à média)
+        # Pesos separados por mando para suavização
+        peso_casa = min(jogos_casa / self.MIN_JOGOS_CONFIAVEL, 1.0)
+        peso_fora = min(jogos_fora / self.MIN_JOGOS_CONFIAVEL, 1.0)
         confianca = min(total_jogos / self.MIN_JOGOS_CONFIAVEL, 1.0)
         
         # Força de ataque
@@ -161,30 +163,28 @@ class TeamModel:
         strength = TeamStrength(
             team_id=team_id,
             team_name=team_name,
-            ataque_casa=self._regress_to_mean(ataque_casa_raw, confianca),
-            ataque_fora=self._regress_to_mean(ataque_fora_raw, confianca),
-            ataque_geral=self._regress_to_mean(
+            ataque_casa=self._clip(self._regress_to_mean(ataque_casa_raw, peso_casa)),
+            ataque_fora=self._clip(self._regress_to_mean(ataque_fora_raw, peso_fora)),
+            ataque_geral=self._clip(self._regress_to_mean(
                 (ataque_casa_raw + ataque_fora_raw) / 2, confianca
-            ),
-            defesa_casa=self._regress_to_mean(defesa_casa_raw, confianca),
-            defesa_fora=self._regress_to_mean(defesa_fora_raw, confianca),
-            defesa_geral=self._regress_to_mean(
+            )),
+            defesa_casa=self._clip(self._regress_to_mean(defesa_casa_raw, peso_casa)),
+            defesa_fora=self._clip(self._regress_to_mean(defesa_fora_raw, peso_fora)),
+            defesa_geral=self._clip(self._regress_to_mean(
                 (defesa_casa_raw + defesa_fora_raw) / 2, confianca
-            ),
-            cartoes_favor=self._regress_to_mean(
-                self._safe_div(
-                    (cartoes_casa + cartoes_fora) / 2,
-                    league_avg.cartoes_total / 2
-                ),
-                confianca
-            ),
-            escanteios_favor=self._regress_to_mean(
-                self._safe_div(
-                    (escanteios_casa + escanteios_fora) / 2,
-                    league_avg.escanteios_total / 2
-                ),
-                confianca
-            ),
+            )),
+            cartoes_favor=self._clip(self._regress_to_mean(
+                self._safe_div(cartoes_casa, league_avg.cartoes_mandante), peso_casa
+            )),
+            cartoes_contra=self._clip(self._regress_to_mean(
+                self._safe_div(cartoes_fora, league_avg.cartoes_visitante), peso_fora
+            )),
+            escanteios_favor=self._clip(self._regress_to_mean(
+                self._safe_div(escanteios_casa, league_avg.escanteios_mandante), peso_casa
+            )),
+            escanteios_contra=self._clip(self._regress_to_mean(
+                self._safe_div(escanteios_fora, league_avg.escanteios_visitante), peso_fora
+            )),
             jogos_casa=jogos_casa,
             jogos_fora=jogos_fora,
             confianca=confianca
@@ -207,6 +207,10 @@ class TeamModel:
         Com muitos jogos (weight = 1.0), usa o valor calculado.
         """
         return weight * value + (1 - weight) * 1.0
+
+    def _clip(self, value: float, min_value: float = 0.6, max_value: float = 1.6) -> float:
+        """Limita valores extremos para evitar lambdas irreais em amostras pequenas."""
+        return max(min_value, min(max_value, value))
     
     def get_all_teams_strength(self, league_id: int, temporada: str = "2025") -> List[TeamStrength]:
         """Retorna força de todos os times da liga."""

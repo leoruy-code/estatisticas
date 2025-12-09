@@ -114,6 +114,7 @@ class PlayerModel:
         gols = (stats.get('gols', 0) or stats.get('goals', 0) or 0)
         assistencias = (stats.get('assistencias', 0) or stats.get('assists', 0) or 0)
         finalizacoes = (stats.get('finalizacoes', 0) or stats.get('shots', 0) or 0)
+        escanteios_batidos = (stats.get('escanteios_batidos', 0) or stats.get('corners', 0) or stats.get('crosses', 0) or 0)
         desarmes = (stats.get('desarmes', 0) or stats.get('tackles', 0) or 0)
         interceptacoes = (stats.get('interceptacoes', 0) or stats.get('interceptions', 0) or 0)
         faltas = (stats.get('faltas_cometidas', 0) or stats.get('fouls', 0) or 0)
@@ -133,6 +134,9 @@ class PlayerModel:
         rating_disciplina = self._calculate_discipline_rating(
             faltas, cartoes_amarelos, cartoes_vermelhos, jogos
         )
+        rating_escanteios = self._calculate_corners_rating(
+            escanteios_batidos, finalizacoes, jogos, posicao
+        )
         
         rating = PlayerRating(
             player_id=player_id,
@@ -142,6 +146,7 @@ class PlayerModel:
             rating_ataque=rating_ataque,
             rating_defesa=rating_defesa,
             rating_disciplina=rating_disciplina,
+            rating_escanteios=rating_escanteios,
             gols_p90=gols * p90_factor / max(jogos, 1) if jogos > 0 else 0,
             assistencias_p90=assistencias * p90_factor / max(jogos, 1) if jogos > 0 else 0,
             finalizacoes_p90=finalizacoes * p90_factor / max(jogos, 1) if jogos > 0 else 0,
@@ -232,6 +237,19 @@ class PlayerModel:
         ) * peso
         
         return min(max(score, 0), 100)
+
+    def _calculate_corners_rating(
+        self, escanteios_batidos: int, finalizacoes: int, jogos: int, posicao: str
+    ) -> float:
+        """Calcula influência em escanteios (0-100) combinando bolas paradas e volume ofensivo."""
+        if jogos == 0:
+            return 50.0
+        # Referência: especialista bate ~2.5 escanteios/jogo
+        esc_pj = escanteios_batidos / jogos
+        fin_pj = finalizacoes / jogos
+        peso = 0.6 if posicao in ['Lateral', 'Meia'] else 0.4
+        score = (esc_pj / 2.5) * 70 + (fin_pj / 3.0) * 30
+        return min(max(score * peso, 0), 100)
     
     def _calculate_discipline_rating(
         self, faltas: int, amarelos: int, vermelhos: int, jogos: int
@@ -288,6 +306,7 @@ class PlayerModel:
                 'ataque': 50.0,
                 'defesa': 50.0,
                 'disciplina': 70.0,
+                'escanteios': 50.0,
                 'rating_medio': 50.0
             }
         
@@ -297,6 +316,26 @@ class PlayerModel:
             'ataque': np.mean([r.rating_ataque for r in ratings]),
             'defesa': np.mean([r.rating_defesa for r in ratings]),
             'disciplina': np.mean([r.rating_disciplina for r in ratings]),
+            'escanteios': np.mean([r.rating_escanteios for r in ratings]),
             'rating_medio': np.mean([r.rating_geral for r in ratings]),
             'jogadores': len(ratings)
+        }
+
+    def calculate_lineup_ratios(self, player_ids: List[int]) -> dict:
+        """Converte força da escalação em multiplicadores (ratios) para λ/κ/μ."""
+        strength = self.calculate_lineup_strength(player_ids)
+        ataque = strength['ataque']
+        esc = strength.get('escanteios', 50.0)
+        disciplina = strength['disciplina']
+        
+        def _ratio(value: float, base: float, sens: float, low: float = 0.7, high: float = 1.35) -> float:
+            delta = (value - base) / 100.0
+            return max(low, min(high, 1.0 + delta * sens))
+        
+        indisciplina = max(0.0, 70.0 - disciplina)
+        return {
+            'off_ratio': _ratio(ataque, 50.0, 0.8),
+            'cross_ratio': _ratio(esc, 50.0, 0.6),
+            'foul_ratio': _ratio(indisciplina, 0.0, 0.8, low=0.85, high=1.6),
+            'strength_snapshot': strength
         }
