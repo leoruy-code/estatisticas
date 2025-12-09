@@ -316,7 +316,7 @@ def get_teams():
         st.error(f"Erro ao buscar times: {str(e)}")
         return []
 
-def predict_match(home_id: int, away_id: int, n_simulations: int = 50_000):
+def predict_match(home_id: int, away_id: int, n_simulations: int = 50_000, lineup_confidence: float = 1.0):
     """Faz predição de partida (sem cache para garantir valores únicos)."""
     try:
         response = requests.post(
@@ -324,7 +324,9 @@ def predict_match(home_id: int, away_id: int, n_simulations: int = 50_000):
             json={
                 "mandante_id": home_id, 
                 "visitante_id": away_id,
-                "n_simulations": n_simulations
+                "n_simulations": n_simulations,
+                "lineup_confidence_mandante": lineup_confidence,
+                "lineup_confidence_visitante": lineup_confidence
             },
             timeout=60
         )
@@ -388,6 +390,16 @@ def main():
             500_000: "~40-50s"
         }
         st.caption(f"⏱️ Tempo estimado: {time_estimate[n_simulations]}")
+        
+        st.markdown("#### ✅ Confiança da escalação")
+        lineup_confidence = st.slider(
+            "Quão confiável é a escalação provável?",
+            min_value=0.0,
+            max_value=1.0,
+            value=0.7,
+            step=0.05,
+            help="0 = ignorar ajuste por lineup, 1 = lineup confirmada"
+        )
         
         st.markdown("---")
         show_stats = st.checkbox("Mostrar estatísticas detalhadas", value=True)
@@ -457,7 +469,7 @@ def show_prediction_tab(show_stats, show_confidence, n_simulations):
                 return
             
             with st.spinner(f"🔮 Simulando {n_simulations:,} partidas...".replace(",", ".")):
-                prediction = predict_match(team_dict[home_team], team_dict[away_team], n_simulations)
+                prediction = predict_match(team_dict[home_team], team_dict[away_team], n_simulations, lineup_confidence)
             
             if prediction:
                 display_prediction(prediction, home_team, away_team, show_stats, show_confidence)
@@ -473,6 +485,10 @@ def display_prediction(prediction, home_team, away_team, show_stats, show_confid
     previsao = prediction.get('previsao', {})
     resultado = previsao.get('resultado', {})
     gols = previsao.get('gols', {})
+    parametros = prediction.get('parametros', {})
+    base_params = parametros.get('base_params', {})
+    lineup_meta = parametros.get('lineup_adjustments', {})
+    warnings = prediction.get('warnings', []) or []
     
     # Card principal de resultado
     st.markdown('<div class="prediction-card">', unsafe_allow_html=True)
@@ -581,6 +597,29 @@ def display_prediction(prediction, home_team, away_team, show_stats, show_confid
             </div>
         </div>
         """, unsafe_allow_html=True)
+
+    # Warnings e metadados de modelo
+    if warnings or base_params:
+        st.markdown("<br>", unsafe_allow_html=True)
+        with st.expander("🔎 Diagnóstico do modelo", expanded=False):
+            if warnings:
+                st.markdown("**Avisos de dados:**")
+                for w in warnings:
+                    st.markdown(f"- {w}")
+            if base_params:
+                st.markdown("**Distribuições e âncoras:**")
+                dist = base_params.get('fatores', {}).get('gols', {})
+                anchors = base_params.get('fatores', {}).get('anchors', {})
+                prefs = base_params.get('distribution_prefs', {})
+                st.markdown(f"- Distribuição gols/cartões/escanteios: `{prefs}`")
+                st.markdown(f"- Âncoras liga (gols casa/fora): {anchors.get('gols_mandante', 0):.2f} / {anchors.get('gols_visitante', 0):.2f}")
+                st.markdown(f"- Cartões mandante/visitante: {anchors.get('cartoes_mandante', 0):.2f} / {anchors.get('cartoes_visitante', 0):.2f}")
+                st.markdown(f"- Escanteios mandante/visitante: {anchors.get('escanteios_mandante', 0):.2f} / {anchors.get('escanteios_visitante', 0):.2f}")
+            if lineup_meta:
+                st.markdown("**Ajustes por escalação:**")
+                conf = lineup_meta.get('lineup_confidence', {})
+                st.markdown(f"- Confiança lineup (casa/fora): {conf.get('mandante', 1.0):.2f} / {conf.get('visitante', 1.0):.2f}")
+                st.json(lineup_meta)
 
 def show_statistics_tab():
     """Tab de estatísticas gerais."""
