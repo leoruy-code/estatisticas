@@ -516,6 +516,10 @@ def show_prediction_tab(show_stats, show_confidence, n_simulations):
     st.session_state['lineup_away_ids'] = [away_map[o] for o in selected_away if o in away_map]
     st.session_state['lineup_home_names'] = [o for o in selected_home]
     st.session_state['lineup_away_names'] = [o for o in selected_away]
+
+    def _has_gk(selected_ids, players):
+        pos_map = {p['id']: (p.get('posicao') or '').lower() for p in players}
+        return any('goleiro' in pos_map.get(pid, '') for pid in selected_ids)
     
     # Botão de predição
     col1, col2, col3 = st.columns([1, 2, 1])
@@ -523,6 +527,19 @@ def show_prediction_tab(show_stats, show_confidence, n_simulations):
         if st.button("🎯 GERAR PREDIÇÃO", use_container_width=True):
             if home_team == away_team:
                 st.warning("⚠️ Selecione times diferentes")
+                return
+
+            # Validação de escalação: exatamente 11 e pelo menos 1 goleiro
+            home_ids = st.session_state.get('lineup_home_ids', [])
+            away_ids = st.session_state.get('lineup_away_ids', [])
+            if len(home_ids) != 11 or len(away_ids) != 11:
+                st.warning("⚠️ Selecione 11 jogadores para cada time")
+                return
+            if not _has_gk(home_ids, home_players):
+                st.warning("⚠️ Escalação do mandante sem goleiro")
+                return
+            if not _has_gk(away_ids, away_players):
+                st.warning("⚠️ Escalação do visitante sem goleiro")
                 return
             
             with st.spinner(f"🔮 Simulando {n_simulations:,} partidas...".replace(",", ".")):
