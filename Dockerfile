@@ -1,21 +1,28 @@
-# Dockerfile para rodar o sistema de estatísticas de futebol com Streamlit
+# RAG Estatísticas - FastAPI Backend
 FROM python:3.12-slim
 
 WORKDIR /app
 
-# Copiar apenas requirements.txt primeiro (melhor cache do Docker)
+# Instalar dependências do sistema
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copiar requirements primeiro (cache do Docker)
 COPY requirements.txt .
 
-# Instalar dependências
+# Instalar dependências Python
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copiar o resto do projeto
+# Copiar código fonte
 COPY . .
 
-# Criar diretório de dados se não existir
+# Criar diretórios necessários
 RUN mkdir -p /app/data
 
-EXPOSE 8501
+EXPOSE 8000
 
-CMD ["streamlit", "run", "src/frontend/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Comando padrão
+CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]

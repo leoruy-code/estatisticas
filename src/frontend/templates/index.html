@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Estatísticas - Previsões de Futebol</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-futbol"></i>
+                <span>RAG Estatísticas</span>
+            </div>
+            <nav class="nav">
+                <a href="#predictor" class="nav-link active">Previsão</a>
+                <a href="#teams" class="nav-link">Times</a>
+                <a href="#about" class="nav-link">Sobre</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Previsões Inteligentes</h1>
+            <p>Modelo estatístico avançado com simulação Monte Carlo</p>
+        </div>
+    </section>
+
+    <!-- Predictor Section -->
+    <section id="predictor" class="predictor-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> Nova Previsão</h2>
+                <p>Selecione os times para gerar a previsão</p>
+            </div>
+
+            <div class="predictor-card">
+                <div class="teams-selector">
+                    <div class="team-select">
+                        <label>Time Mandante</label>
+                        <select id="mandante-select">
+                            <option value="">Selecione...</option>
+                        </select>
+                        <div class="team-badge" id="mandante-badge"></div>
+                    </div>
+
+                    <div class="vs-divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="team-select">
+                        <label>Time Visitante</label>
+                        <select id="visitante-select">
+                            <option value="">Selecione...</option>
+                        </select>
+                        <div class="team-badge" id="visitante-badge"></div>
+                    </div>
+                </div>
+
+                <div class="options-row">
+                    <div class="option-group">
+                        <label>Tipo de Competição</label>
+                        <select id="competicao-select">
+                            <option value="pontos_corridos">Pontos Corridos</option>
+                            <option value="mata_mata">Mata-Mata</option>
+                            <option value="grupo">Fase de Grupos</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label>Simulações</label>
+                        <select id="simulations-select">
+                            <option value="10000">10.000 (Rápido)</option>
+                            <option value="50000" selected>50.000 (Padrão)</option>
+                            <option value="100000">100.000 (Preciso)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="predict-btn" class="predict-button" disabled>
+                    <i class="fas fa-magic"></i>
+                    Gerar Previsão
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="results-section hidden">
+                <div class="results-header">
+                    <h3 id="match-title">Flamengo vs Palmeiras</h3>
+                    <span class="confidence-badge" id="confidence-badge">85% confiança</span>
+                </div>
+
+                <!-- Resultado Principal -->
+                <div class="result-main">
+                    <div class="prob-bar">
+                        <div class="prob-segment home" id="prob-home" style="width: 45%">
+                            <span class="prob-label">Mandante</span>
+                            <span class="prob-value">45%</span>
+                        </div>
+                        <div class="prob-segment draw" id="prob-draw" style="width: 25%">
+                            <span class="prob-label">Empate</span>
+                            <span class="prob-value">25%</span>
+                        </div>
+                        <div class="prob-segment away" id="prob-away" style="width: 30%">
+                            <span class="prob-label">Visitante</span>
+                            <span class="prob-value">30%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <!-- Gols -->
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-futbol"></i></div>
+                        <h4>Gols Esperados</h4>
+                        <div class="stat-row">
+                            <span>Mandante:</span>
+                            <span id="gols-mandante">1.52</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Visitante:</span>
+                            <span id="gols-visitante">1.08</span>
+                        </div>
+                        <div class="stat-row highlight">
+                            <span>Total:</span>
+                            <span id="gols-total">2.60</span>
+                        </div>
+                    </div>
+
+                    <!-- Over/Under -->
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+                        <h4>Over/Under Gols</h4>
+                        <div class="stat-row">
+                            <span>Over 1.5:</span>
+                            <span id="over-15">72%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Over 2.5:</span>
+                            <span id="over-25">48%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>BTTS:</span>
+                            <span id="btts">55%</span>
+                        </div>
+                    </div>
+
+                    <!-- Cartões -->
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-square" style="color: #f1c40f;"></i></div>
+                        <h4>Cartões</h4>
+                        <div class="stat-row">
+                            <span>Mandante:</span>
+                            <span id="cartoes-mandante">2.1</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Visitante:</span>
+                            <span id="cartoes-visitante">2.5</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Over 4.5:</span>
+                            <span id="over-cartoes">45%</span>
+                        </div>
+                    </div>
+
+                    <!-- Escanteios -->
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-flag"></i></div>
+                        <h4>Escanteios</h4>
+                        <div class="stat-row">
+                            <span>Mandante:</span>
+                            <span id="escanteios-mandante">5.2</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Visitante:</span>
+                            <span id="escanteios-visitante">4.1</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Over 9.5:</span>
+                            <span id="over-escanteios">52%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placares Prováveis -->
+                <div class="scores-section">
+                    <h4><i class="fas fa-list-ol"></i> Placares Mais Prováveis</h4>
+                    <div class="scores-grid" id="scores-grid">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teams Section -->
+    <section id="teams" class="teams-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-shield-alt"></i> Times</h2>
+                <p>Força relativa dos times do Brasileirão 2025</p>
+            </div>
+
+            <div class="teams-grid" id="teams-grid">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-info-circle"></i> Sobre o Modelo</h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-database"></i></div>
+                    <h4>Dados Atualizados</h4>
+                    <p>Estatísticas em tempo real de todos os times e jogadores do Brasileirão 2025</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-random"></i></div>
+                    <h4>Monte Carlo</h4>
+                    <p>Milhares de simulações para gerar probabilidades precisas</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-chart-pie"></i></div>
+                    <h4>Poisson & NegBinomial</h4>
+                    <p>Distribuições estatísticas adequadas para cada tipo de evento</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-users"></i></div>
+                    <h4>Análise por Jogador</h4>
+                    <p>Ajuste das previsões baseado na escalação de cada time</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>RAG Estatísticas © 2025 - Modelo estatístico para análise de futebol</p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Simulando partida...</p>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
