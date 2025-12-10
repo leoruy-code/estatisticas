@@ -103,15 +103,15 @@ class ModelCalibrator:
         cursor.execute("""
             SELECT 
                 m.id,
-                m.mandante_id,
-                m.visitante_id,
-                m.gols_mandante,
-                m.gols_visitante
+                m.home_team_id AS mandante_id,
+                m.away_team_id AS visitante_id,
+                m.home_goals    AS gols_mandante,
+                m.away_goals    AS gols_visitante
             FROM matches m
-            JOIN teams t ON m.mandante_id = t.id
+            JOIN teams t ON m.home_team_id = t.id
             WHERE t.league_id = %s
-            AND m.status = 'finished'
-            AND m.gols_mandante IS NOT NULL
+              AND m.status = 'finished'
+              AND m.home_goals IS NOT NULL
             ORDER BY m.data DESC
             LIMIT 200
         """, (league_id,))

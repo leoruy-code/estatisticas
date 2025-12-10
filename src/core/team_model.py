@@ -103,9 +103,12 @@ class TeamModel:
                 AVG(home_yellow_cards + home_red_cards) as cartoes,
                 AVG(home_corners) as escanteios,
                 COUNT(*) as jogos
-            FROM matches
-            WHERE home_team_id = %s AND status = 'finished'
-        """, (team_id,))
+            FROM matches m
+            JOIN teams t ON m.home_team_id = t.id
+            WHERE m.home_team_id = %s 
+              AND t.league_id = %s
+              AND m.status = 'finished'
+        """, (team_id, league_id))
         casa = cursor.fetchone()
         
         # Jogos como visitante
@@ -116,9 +119,12 @@ class TeamModel:
                 AVG(away_yellow_cards + away_red_cards) as cartoes,
                 AVG(away_corners) as escanteios,
                 COUNT(*) as jogos
-            FROM matches
-            WHERE away_team_id = %s AND status = 'finished'
-        """, (team_id,))
+            FROM matches m
+            JOIN teams t ON m.away_team_id = t.id
+            WHERE m.away_team_id = %s 
+              AND t.league_id = %s
+              AND m.status = 'finished'
+        """, (team_id, league_id))
         fora = cursor.fetchone()
         
         conn.close()

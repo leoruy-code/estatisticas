@@ -131,6 +131,9 @@ class ContextAdjuster:
         Returns:
             Dict ajustado
         """
+        # Mantém campos auxiliares (ex: distribution_prefs) para o restante do pipeline.
+        adjusted = dict(params)
+
         # Fatores de competição
         f_comp = context.get_fator_competicao()
         
@@ -141,7 +144,7 @@ class ContextAdjuster:
         f_imp = context.get_fator_importancia()
         
         # Aplicar ajustes
-        adjusted = {
+        adjusted.update({
             'lambda_mandante': (
                 params['lambda_mandante'] * 
                 f_comp['gols'] * 
@@ -170,6 +173,6 @@ class ContextAdjuster:
                 params['kappa_visitante'] * 
                 f_comp['escanteios']
             )
-        }
+        })
         
         return adjusted

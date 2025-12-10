@@ -64,7 +64,8 @@ class LineupAdjuster:
             conf = max(0.0, min(1.0, confidence))
             return 1.0 + (base_ratio - 1.0) * conf
 
-        adjusted = {
+        adjusted = dict(params)
+        adjusted.update({
             'lambda_mandante': params['lambda_mandante'] * _blend(ratios_m['off_ratio'], confidence_mandante) * max(0.8, min(1.2, 1.0 / _blend(ratios_v.get('off_ratio', 1.0), confidence_visitante))),
             'lambda_visitante': params['lambda_visitante'] * _blend(ratios_v['off_ratio'], confidence_visitante) * max(0.8, min(1.2, 1.0 / _blend(ratios_m.get('off_ratio', 1.0), confidence_mandante))),
             'mu_mandante': params['mu_mandante'] * _blend(ratios_m['foul_ratio'], confidence_mandante),
@@ -82,7 +83,7 @@ class LineupAdjuster:
                 'mandante': max(0.0, min(1.0, confidence_mandante)),
                 'visitante': max(0.0, min(1.0, confidence_visitante))
             }
-        }
+        })
         
         return adjusted
     
